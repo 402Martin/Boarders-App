@@ -1,0 +1,1 @@
+export { StyledInputFormField } from './StyledInputFormField';
