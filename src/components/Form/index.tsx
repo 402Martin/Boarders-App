@@ -10,37 +10,54 @@ import StyledTouchableAlternate from '../StyledTouchableAlternate';
 import { StyledView } from '../StyledView';
 import { styles } from './styles';
 
-const Form = () => {
+type Props = {
+  inputs?: string[];
+  buttons?: { text: string; type: string }[];
+};
+const Form: React.FC<Props> = (props) => {
+  const { inputs, buttons } = props;
   return (
     <SceneContainer style={styles.container}>
       <StyledView style={styles.form}>
-        <StyledTextInput label="Nombre de usuario" style={styles.formChild}></StyledTextInput>
-        <StyledTextInput label="Email" style={styles.formChild}></StyledTextInput>
-        <StyledTextInput label="Contraseña" style={styles.formChild}></StyledTextInput>
-        <StyledTouchable
-          hitSlop={{
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
-          }}
-          style={styles.formButton}
-        >
-          <StyledText style={styles.formButtonText}>Registrarme</StyledText>
-        </StyledTouchable>
-        <StyledTouchableAlternate
-          hitSlop={{
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
-          }}
-          style={styles.formButton}
-        >
-          <Text style={styles.formButtonText}>¿Tienes una cuenta? {'\n'} Inicia sesion</Text>
-        </StyledTouchableAlternate>
+        <>
+          {inputs?.map((input) => (
+            <StyledTextInput label={input} style={styles.formChild}></StyledTextInput>
+          ))}
+          {buttons?.map(
+            (button) =>
+              (button.type != 'alternate' && (
+                <StyledTouchable
+                  hitSlop={{
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                  }}
+                  style={styles.formButton}
+                >
+                  <StyledText style={styles.formButtonText}>{button.text}</StyledText>
+                </StyledTouchable>
+              )) ||
+              (button.type === 'alternate' && (
+                <StyledTouchableAlternate
+                  hitSlop={{
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                  }}
+                  style={styles.formButton}
+                >
+                  <Text style={styles.formButtonText}>{button.text}</Text>
+                </StyledTouchableAlternate>
+              )),
+          )}
 
-        <Message message="Registro Extioso!" color={PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50}></Message>
+          <Message
+            message="Registro Extioso!"
+            color={PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50}
+          ></Message>
+        </>
       </StyledView>
     </SceneContainer>
   );

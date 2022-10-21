@@ -10,10 +10,15 @@ import { strings } from './strings';
 import { styles } from './styles';
 
 const Register = () => {
+  const inputs = ['Nombre de usuario', 'Email', 'Contraseña'];
+  const buttons = [
+    { text: 'Registrarme', type: 'normal' },
+    { text: '¿Tienes una cuenta? \n Inicia sesion', type: 'alternate' },
+  ];
   return (
     <SceneContainer>
       <Title />
-      <Form></Form>
+      <Form inputs={inputs} buttons={buttons}></Form>
     </SceneContainer>
   );
 };
