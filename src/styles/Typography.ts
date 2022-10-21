@@ -1,13 +1,13 @@
-import { TextStyle } from 'react-native'
+import { TextStyle } from 'react-native';
 
-import { normalizedFontSize } from './scale'
-import { TypographyScale, TypographyStyle } from './types'
+import { normalizedFontSize } from './scale';
+import { TypographyScale, TypographyStyle } from './types';
 
 export const Typography: TypographyStyle<TextStyle> = {
   [TypographyScale.HEADING_BOLD1]: {
     fontFamily: 'Nunito-Bold',
     // Design reference: `fontSize: 28`
-    fontSize: normalizedFontSize(3.3),
+    fontSize: normalizedFontSize(6.3),
     fontWeight: '700',
   },
   [TypographyScale.HEADING_BOLD2]: {
@@ -64,4 +64,10 @@ export const Typography: TypographyStyle<TextStyle> = {
     fontSize: normalizedFontSize(1.45),
     fontWeight: '600',
   },
-}
+  [TypographyScale.BUTTON]: {
+    fontFamily: 'Nunito-Bold',
+    // Design reference: `fontSize: 28`
+    fontSize: normalizedFontSize(2.5),
+    fontWeight: '700',
+  },
+};

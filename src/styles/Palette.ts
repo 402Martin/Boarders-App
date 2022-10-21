@@ -1,12 +1,12 @@
-import { PaletteScale, PaletteStyle } from './types'
+import { PaletteScale, PaletteStyle } from './types';
 
 export enum Colors {
-  PRIMARY_FIRST = '#8352FD',
+  PRIMARY_FIRST = '#f57200',
   PRIMARY_SECOND = '#2B1133',
   PRIMARY_THIRD = '#371641',
-  PRIMARY_FOURTH = '#612773',
+  PRIMARY_FOURTH = '#d2d2d2',
   PRIMARY_FIFTH = '#CCA0D9',
-  SECONDARY_FIRST = '#B28138',
+  SECONDARY_FIRST = '#c1c1c1',
   SECONDARY_SECOND = '#E5A648',
   SECONDARY_THIRD = '#FFB850',
   SECONDARY_FOURTH = '#FFCC82',
@@ -72,27 +72,27 @@ export const Palette: PaletteStyle<string> = {
   THIRD_SURFACE_GREYSCALE10: Colors.THIRD_SURFACE_GREYSCALE10,
   WHITE: Colors.WHITE,
   BLACK: Colors.BLACK,
-}
+};
 
 function checkOpacityValue(opacity: number) {
   if (opacity < 0 || opacity > 1) {
-    throw new Error(`opacity must between 0 and 1, got ${opacity}`)
+    throw new Error(`opacity must between 0 and 1, got ${opacity}`);
   }
 }
 
 export const colorTranslucent = (color: PaletteScale, opacity: number) => {
-  const colorToOpaque = Palette[color]
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(colorToOpaque)
+  const colorToOpaque = Palette[color];
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(colorToOpaque);
   if (!result) {
-    throw new Error(`Error in opacity`)
+    throw new Error(`Error in opacity`);
   }
-  return `rgba(${parseInt(result[1], 16)}, ${parseInt(
-    result[2],
+  return `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(
+    result[3],
     16,
-  )}, ${parseInt(result[3], 16)},  ${opacity})`
-}
+  )},  ${opacity})`;
+};
 
 export function blackTranslucent(opacity: number) {
-  checkOpacityValue(opacity)
-  return `rgba(0, 0, 0, ${opacity})`
+  checkOpacityValue(opacity);
+  return `rgba(0, 0, 0, ${opacity})`;
 }

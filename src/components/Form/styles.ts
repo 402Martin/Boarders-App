@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { widthPercentageToDP } from 'react-native-responsive-screen';
 import { Theme } from 'src/styles/Theme';
+import { TypographyScale } from 'src/styles/types';
+import { Typography } from 'src/styles/Typography';
 
 export const styles = StyleSheet.create({
   item: {
@@ -33,5 +35,32 @@ export const styles = StyleSheet.create({
   checkBoxTextMaxWidth: {
     maxWidth: widthPercentageToDP(65),
     backgroundColor: Theme.colors.TRANSPARENT,
+  },
+  container: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  form: {
+    display: 'flex',
+    width: '80%',
+    height: '95%',
+    paddingTop: '10%',
+  },
+  formChild: {
+    marginTop: '2%',
+  },
+
+  formButton: {
+    marginTop: '2%',
+    textAlign: 'center',
+    flexBasis: 'auto',
+    content: 'fill',
+  },
+  formButtonText: {
+    ...Typography.BUTTON,
+    marginTop: '3%',
+    marginBottom: '3%',
   },
 });

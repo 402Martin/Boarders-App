@@ -14,8 +14,7 @@ export const StyledView = React.forwardRef<any, CustomViewProps>((props, ref) =>
   const { Theme: ActualTheme } = useContext(ThemeContext);
 
   const { children, color, style } = props;
-  const themedColor = color ? ActualTheme.colors[color] : ActualTheme.colors.TRANSPARENT;
-
+  const themedColor = color ? ActualTheme.colors[color] : '#f7f7f7';
   const contextStyle: StyleProp<ViewStyle> = {
     backgroundColor: themedColor,
   };
