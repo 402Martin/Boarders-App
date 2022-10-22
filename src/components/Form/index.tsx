@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { NativeSyntheticEvent, Text, TextInputChangeEventData } from 'react-native';
+import { useForm } from 'src/hooks/useForm';
 import { PaletteScale } from 'src/styles/types';
 import Message from '../Message';
 import { SceneContainer } from '../SceneContainer';
@@ -9,19 +10,42 @@ import { StyledTouchable } from '../StyledTouchable';
 import StyledTouchableAlternate from '../StyledTouchableAlternate';
 import { StyledView } from '../StyledView';
 import { styles } from './styles';
+import { ISchema } from './types';
 
-type Props = {
-  inputs?: string[];
-  buttons?: { text: string; type: string }[];
+type Props<T extends object> = {
+  schema: ISchema;
+  notify?: (state: ISchema) => void;
+  buttons?: { text: string; type: string; onClick: (...arg: any) => any; isSubmit?: boolean }[];
 };
-const Form: React.FC<Props> = (props) => {
-  const { inputs, buttons } = props;
+const Form = <T extends object>(props: Props<T>) => {
+  const { schema, notify, buttons } = props;
+
+  const [fields, isValid, handleFieldsChange, getValues, handleOnFocus, handleIsInvalid] = useForm<T>(
+    schema,
+    notify,
+  );
   return (
     <SceneContainer style={styles.container}>
       <StyledView style={styles.form}>
         <>
-          {inputs?.map((input) => (
-            <StyledTextInput label={input} style={styles.formChild}></StyledTextInput>
+          {Object.keys(fields)?.map((key: string) => (
+            <>
+              <StyledTextInput
+                label={fields[key].label}
+                style={styles.formChild}
+                key={key}
+                onChangeText={(text: string) => {
+                  handleFieldsChange(text, key);
+                }}
+                validValue={fields[key].isValid}
+                onBlur={() => handleOnFocus(key)}
+              ></StyledTextInput>
+              {!fields[key].isValid && (
+                <StyledText style={styles.formChildError}>
+                  {fields[key].isNotValidmessage || 'valor invalid'}
+                </StyledText>
+              )}
+            </>
           ))}
           {buttons?.map(
             (button) =>
@@ -34,6 +58,10 @@ const Form: React.FC<Props> = (props) => {
                     right: 10,
                   }}
                   style={styles.formButton}
+                  disabled={!isValid}
+                  onPress={() => {
+                    button.isSubmit ? button.onClick(getValues()) : button.onClick();
+                  }}
                 >
                   <StyledText style={styles.formButtonText}>{button.text}</StyledText>
                 </StyledTouchable>
@@ -45,6 +73,9 @@ const Form: React.FC<Props> = (props) => {
                     bottom: 10,
                     left: 10,
                     right: 10,
+                  }}
+                  onPress={() => {
+                    button.isSubmit ? button.onClick(getValues()) : button.onClick();
                   }}
                   style={styles.formButton}
                 >

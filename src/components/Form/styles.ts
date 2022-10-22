@@ -51,6 +51,10 @@ export const styles = StyleSheet.create({
   formChild: {
     marginTop: '2%',
   },
+  formChildError: {
+    borderColor: Theme.colors.SECONDARY_ACCENT_ERROR_RED50,
+    color: Theme.colors.SECONDARY_ACCENT_ERROR_RED50,
+  },
 
   formButton: {
     marginTop: '2%',
