@@ -8,24 +8,13 @@
  * @format
  */
 
-import React, { type PropsWithChildren } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleProp,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  ViewStyle,
-} from 'react-native';
-
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { StyledView } from 'src/components/StyledView';
 import Register from 'src/scenes/register';
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = true;
 
   return (
     <StyledView style={styles.sceneContainer}>

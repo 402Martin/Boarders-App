@@ -18,9 +18,10 @@ type Props<T extends object> = {
   schema: ISchema;
   notify?: (state: ISchema) => void;
   buttons?: { text: string; type: string; onClick: (...arg: any) => any; isSubmit?: boolean }[];
+  message?: { type: PaletteScale; message: string };
 };
 const Form = <T extends object>(props: Props<T>) => {
-  const { schema, notify, buttons } = props;
+  const { schema, notify, buttons, message } = props;
 
   const [fields, isValid, handleFieldsChange, getValues, handleOnFocus, handleIsInvalid] = useForm<T>(
     schema,
@@ -43,7 +44,14 @@ const Form = <T extends object>(props: Props<T>) => {
         {buttons?.map((button) => (
           <HandleButton button={button} getValues={getValues} isValid={isValid} key={button.text} />
         ))}
-        <Message message="Registro Extioso!" color={PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50}></Message>
+        {message?.message?.length ? (
+          <Message
+            message={message?.message || ''}
+            color={message?.type || PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50}
+          ></Message>
+        ) : (
+          <></>
+        )}
       </StyledView>
     </SceneContainer>
   );

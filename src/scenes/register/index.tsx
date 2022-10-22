@@ -1,13 +1,17 @@
-import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'src/components/Form';
 import { ISchema } from 'src/components/Form/types';
 import { SceneContainer } from 'src/components/SceneContainer';
 import Title from 'src/components/title';
-import { userService } from 'src/services';
-import { IUserRegister } from 'src/types/main.types';
+import { userService } from 'src/services/user.service';
+import { PaletteScale } from 'src/styles/types';
+import { IMessage, IUserRegister } from 'src/types/main.types';
 
 const Register = () => {
+  const [message, setMessage] = useState<IMessage>({
+    type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
+    message: '',
+  });
   const schema: ISchema = {
     username: {
       value: '',
@@ -41,7 +45,9 @@ const Register = () => {
   };
   const submit = async (objValues: IUserRegister) => {
     const user = await userService.create(objValues);
-    console.log({ user });
+    console.log(user);
+    if (user)
+      setMessage({ type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50, message: 'Registro Exitoso!' });
   };
   const buttons = [
     { text: 'Registrarme', type: 'normal', onClick: submit, isSubmit: true },
@@ -50,7 +56,7 @@ const Register = () => {
   return (
     <SceneContainer>
       <Title />
-      <Form<IUserRegister> schema={schema} buttons={buttons}></Form>
+      <Form<IUserRegister> schema={schema} buttons={buttons} message={message}></Form>
     </SceneContainer>
   );
 };
