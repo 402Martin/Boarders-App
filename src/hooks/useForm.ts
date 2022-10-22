@@ -11,7 +11,7 @@ export const useForm = <T extends object>(initialState: ISchema, handleNotify?: 
     const newElem = {
       ...oldElem,
       value: oldElem.transformToNumber ? Number(value) : value,
-      isValid: oldElem.validation(value),
+      isValid: oldElem.validation(value) || !oldElem.hasFocus,
     };
     if (newElem.notify && handleNotify) handleNotify({ ...fields, [key]: { ...newElem } });
     setValues({
