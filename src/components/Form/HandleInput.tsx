@@ -22,6 +22,7 @@ const HandleInput: React.FC<Props> = (props) => {
         onChangeText={(text: string) => {
           handleFieldsChange(text, key);
         }}
+        secureTextEntry={field.type === 'password'}
         validValue={field.isValid}
         onBlur={() => handleOnFocus(key)}
       ></StyledTextInput>
