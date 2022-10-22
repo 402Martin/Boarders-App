@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import Form from 'src/components/Form';
 import { SceneContainer } from 'src/components/SceneContainer';
 import Title from 'src/components/title';
+import { RootStackParamList, routes } from 'src/navigation/routes';
 import { userService } from 'src/services/user.service';
 import { PaletteScale } from 'src/styles/types';
 import { IMessage, IUserRegister } from 'src/types/main.types';
 import { schema, succesMessage } from './schemas';
 import { strings } from './strings';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const Register = () => {
+type Props = NativeStackScreenProps<RootStackParamList, routes.REGISTER, 'MyStack'>;
+const Register = ({ navigation }: Props) => {
   const [message, setMessage] = useState<IMessage | undefined>();
 
   const submit = async (objValues: IUserRegister) => {
@@ -16,7 +19,7 @@ const Register = () => {
     if (user) setMessage(succesMessage);
   };
   const back = () => {
-    console.log('back');
+    navigation.navigate(routes.LOGIN);
   };
   const buttons = [
     { ...strings.buttons.register, isSubmit: true, onClick: submit },
