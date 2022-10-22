@@ -1,7 +1,7 @@
 import React from 'react';
 import { KeyboardTypeOptions, StyleSheet, TextInputProps } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { TextInputProps as TextInputPaperProps } from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
+import { TextInputProps as TextInputPaperProps } from 'react-native-paper';
 import { Colors } from 'src/styles/Palette';
 
 interface LayoutProps extends TextInputProps {

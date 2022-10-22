@@ -17,8 +17,7 @@ export const StyledTouchable: React.FC<CustomButtonProps> = (props) => {
   const { Theme: ActualTheme } = useContext(ThemeContext);
   const { color, style, children, borderColor, disabled, dark, underlayColor } = props;
 
-  const themedColor = color ? ActualTheme.colors[color] : ActualTheme.colors.PRIMARY_FOURTH;
-
+  const themedColor = color ? ActualTheme.colors[color] : ActualTheme.colors.PRIMARY_FIRST;
   const themedBorderColor = borderColor ? ActualTheme.colors[borderColor] : ActualTheme.colors.PRIMARY_FOURTH;
 
   const contextStyle: StyleProp<ViewStyle> = {
@@ -26,6 +25,10 @@ export const StyledTouchable: React.FC<CustomButtonProps> = (props) => {
       ? themedColor
       : colorTranslucent(color ? color : PaletteScale.PRIMARY_FOURTH, 0.5),
     borderColor: themedBorderColor,
+    minHeight: 40,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   };
 
   const mergedStyle: StyleProp<ViewStyle> = style

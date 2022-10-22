@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TextInputProps } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { TextInputProps as TextInputPaperProps } from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
+import { TextInputProps as TextInputPaperProps } from 'react-native-paper';
 import { useInputColor } from 'src/hooks/useInputColor';
 import { Colors } from 'src/styles/Palette';
 import { Theme } from 'src/styles/Theme';

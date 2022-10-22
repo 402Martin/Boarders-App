@@ -1,9 +1,9 @@
-import { TextStyle } from 'react-native'
+import { TextStyle } from 'react-native';
 
 export interface ITheme {
-  colors: PaletteStyle<string>
-  typography: TypographyStyle<TextStyle>
-  spacing: SpacingStyle<number>
+  colors: PaletteStyle<string>;
+  typography: TypographyStyle<TextStyle>;
+  spacing: SpacingStyle<number>;
 }
 
 export enum TypographyScale {
@@ -17,19 +17,21 @@ export enum TypographyScale {
   BODY_REGULAR = 'BODY_REGULAR',
   LINK_REGULAR = 'LINK_REGULAR',
   ACTION_REGULAR = 'ACTION_REGULAR',
+  BUTTON = 'BUTTON',
 }
 
 export interface TypographyStyle<T> {
-  [TypographyScale.HEADING_BOLD1]: T
-  [TypographyScale.HEADING_BOLD2]: T
-  [TypographyScale.HEADING_SEMI_BOLD3]: T
-  [TypographyScale.PARAGRAPH_REGULAR1]: T
-  [TypographyScale.PARAGRAPH_REGULAR2]: T
-  [TypographyScale.PARAGRAPH_BOLD2]: T
-  [TypographyScale.BODY_BOLD]: T
-  [TypographyScale.BODY_REGULAR]: T
-  [TypographyScale.LINK_REGULAR]: T
-  [TypographyScale.ACTION_REGULAR]: T
+  [TypographyScale.HEADING_BOLD1]: T;
+  [TypographyScale.HEADING_BOLD2]: T;
+  [TypographyScale.HEADING_SEMI_BOLD3]: T;
+  [TypographyScale.PARAGRAPH_REGULAR1]: T;
+  [TypographyScale.PARAGRAPH_REGULAR2]: T;
+  [TypographyScale.PARAGRAPH_BOLD2]: T;
+  [TypographyScale.BODY_BOLD]: T;
+  [TypographyScale.BODY_REGULAR]: T;
+  [TypographyScale.LINK_REGULAR]: T;
+  [TypographyScale.ACTION_REGULAR]: T;
+  [TypographyScale.BUTTON]: T;
 }
 
 export enum PaletteScale {
@@ -70,40 +72,40 @@ export enum PaletteScale {
 }
 
 export interface PaletteStyle<T> {
-  [PaletteScale.PRIMARY_FIRST]: T
-  [PaletteScale.PRIMARY_SECOND]: T
-  [PaletteScale.PRIMARY_THIRD]: T
-  [PaletteScale.PRIMARY_FOURTH]: T
-  [PaletteScale.PRIMARY_FIFTH]: T
-  [PaletteScale.SECONDARY_FIRST]: T
-  [PaletteScale.SECONDARY_SECOND]: T
-  [PaletteScale.SECONDARY_THIRD]: T
-  [PaletteScale.SECONDARY_FOURTH]: T
-  [PaletteScale.SECONDARY_FIFTH]: T
-  [PaletteScale.TEXT]: T
-  [PaletteScale.TRANSPARENT]: T
-  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN90]: T
-  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN70]: T
-  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50]: T
-  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN30]: T
-  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN10]: T
-  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE90]: T
-  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE70]: T
-  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE50]: T
-  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE30]: T
-  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE10]: T
-  [PaletteScale.SECONDARY_ACCENT_ERROR_RED90]: T
-  [PaletteScale.SECONDARY_ACCENT_ERROR_RED70]: T
-  [PaletteScale.SECONDARY_ACCENT_ERROR_RED50]: T
-  [PaletteScale.SECONDARY_ACCENT_ERROR_RED30]: T
-  [PaletteScale.SECONDARY_ACCENT_ERROR_RED10]: T
-  [PaletteScale.THIRD_SURFACE_GREYSCALE90]: T
-  [PaletteScale.THIRD_SURFACE_GREYSCALE70]: T
-  [PaletteScale.THIRD_SURFACE_GREYSCALE50]: T
-  [PaletteScale.THIRD_SURFACE_GREYSCALE30]: T
-  [PaletteScale.THIRD_SURFACE_GREYSCALE10]: T
-  [PaletteScale.WHITE]: T
-  [PaletteScale.BLACK]: T
+  [PaletteScale.PRIMARY_FIRST]: T;
+  [PaletteScale.PRIMARY_SECOND]: T;
+  [PaletteScale.PRIMARY_THIRD]: T;
+  [PaletteScale.PRIMARY_FOURTH]: T;
+  [PaletteScale.PRIMARY_FIFTH]: T;
+  [PaletteScale.SECONDARY_FIRST]: T;
+  [PaletteScale.SECONDARY_SECOND]: T;
+  [PaletteScale.SECONDARY_THIRD]: T;
+  [PaletteScale.SECONDARY_FOURTH]: T;
+  [PaletteScale.SECONDARY_FIFTH]: T;
+  [PaletteScale.TEXT]: T;
+  [PaletteScale.TRANSPARENT]: T;
+  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN90]: T;
+  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN70]: T;
+  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50]: T;
+  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN30]: T;
+  [PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN10]: T;
+  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE90]: T;
+  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE70]: T;
+  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE50]: T;
+  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE30]: T;
+  [PaletteScale.SECONDARY_ACCENT_INFO_BLUE10]: T;
+  [PaletteScale.SECONDARY_ACCENT_ERROR_RED90]: T;
+  [PaletteScale.SECONDARY_ACCENT_ERROR_RED70]: T;
+  [PaletteScale.SECONDARY_ACCENT_ERROR_RED50]: T;
+  [PaletteScale.SECONDARY_ACCENT_ERROR_RED30]: T;
+  [PaletteScale.SECONDARY_ACCENT_ERROR_RED10]: T;
+  [PaletteScale.THIRD_SURFACE_GREYSCALE90]: T;
+  [PaletteScale.THIRD_SURFACE_GREYSCALE70]: T;
+  [PaletteScale.THIRD_SURFACE_GREYSCALE50]: T;
+  [PaletteScale.THIRD_SURFACE_GREYSCALE30]: T;
+  [PaletteScale.THIRD_SURFACE_GREYSCALE10]: T;
+  [PaletteScale.WHITE]: T;
+  [PaletteScale.BLACK]: T;
 }
 
 export enum SpacingScale {
@@ -111,5 +113,5 @@ export enum SpacingScale {
 }
 
 export interface SpacingStyle<T> {
-  [SpacingScale.HORIZONTAL_SCREEN_PADDING]: T
+  [SpacingScale.HORIZONTAL_SCREEN_PADDING]: T;
 }
