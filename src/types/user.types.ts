@@ -5,3 +5,8 @@ export type User = {
   profilePicId: string;
   id: number;
 };
+
+export interface ILogin {
+  username: string;
+  password: string;
+}
