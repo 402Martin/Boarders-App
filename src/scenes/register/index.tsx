@@ -1,15 +1,11 @@
+import axios from 'axios';
 import React from 'react';
 import Form from 'src/components/Form';
-import { ISchema, ISchemaAttribute } from 'src/components/Form/types';
+import { ISchema } from 'src/components/Form/types';
 import { SceneContainer } from 'src/components/SceneContainer';
-import { StyledText } from 'src/components/StyledText';
-import { StyledView } from 'src/components/StyledView';
 import Title from 'src/components/title';
-import { genericStyles } from 'src/styles/generic.styles';
-import { PaletteScale, TypographyScale } from 'src/styles/types';
+import { userService } from 'src/services';
 import { IUserRegister } from 'src/types/main.types';
-import { strings } from './strings';
-import { styles } from './styles';
 
 const Register = () => {
   const schema: ISchema = {
@@ -18,7 +14,6 @@ const Register = () => {
       isValid: true,
       isNotValidmessage: 'Debe contener almenos 6 caracteres',
       hasFocus: false,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       validation: (value: string) => value.trim().length > 6,
       label: 'Nombre de usuario',
     },
@@ -28,7 +23,6 @@ const Register = () => {
       isValid: true,
       hasFocus: false,
       isNotValidmessage: 'Debe ser un email valido',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       validation: (value: string) => value.includes('@'),
       label: 'Email',
     },
@@ -45,8 +39,9 @@ const Register = () => {
   const back = () => {
     console.log('back');
   };
-  const submit = (objValues: IUserRegister) => {
-    console.log({ objValues });
+  const submit = async (objValues: IUserRegister) => {
+    const user = await userService.create(objValues);
+    console.log({ user });
   };
   const buttons = [
     { text: 'Registrarme', type: 'normal', onClick: submit, isSubmit: true },

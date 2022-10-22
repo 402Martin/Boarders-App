@@ -33,3 +33,10 @@ export interface ISchemaAttribute {
   transformToNumber?: boolean;
   notify?: boolean;
 }
+
+export interface IButonSchema {
+  text: string;
+  type: string;
+  onClick: (...arg: any) => any;
+  isSubmit?: boolean;
+}
