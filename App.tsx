@@ -11,6 +11,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { StyledView } from 'src/components/StyledView';
+import Login from 'src/scenes/Login';
 import Register from 'src/scenes/register';
 
 const App = () => {
@@ -18,7 +19,8 @@ const App = () => {
 
   return (
     <StyledView style={styles.sceneContainer}>
-      <Register />
+      {/* <Register /> */}
+      <Login />
     </StyledView>
   );
 };
