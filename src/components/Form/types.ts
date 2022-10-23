@@ -26,7 +26,7 @@ export interface ISchemaAttribute {
   hasFocus: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   validation: any;
-  type?: 'number' | 'date' | 'text' | 'select' | 'amount' | 'password';
+  type?: 'number' | 'date' | 'text' | 'select' | 'amount' | 'password' | 'game' | 'location';
   options?: { [key: string]: string };
   placeholder?: string;
   label?: string;

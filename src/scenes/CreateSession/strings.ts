@@ -1,12 +1,8 @@
 export const strings = {
   buttons: {
-    login: {
-      text: 'Ingresar',
+    createSession: {
+      text: 'Create Session',
       type: 'normal',
-    },
-    register: {
-      text: '¿No tienes una cuenta? \n Regístrate',
-      type: 'alternate',
     },
   },
 };

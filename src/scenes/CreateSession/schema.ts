@@ -2,20 +2,45 @@ import { ISchema } from 'src/components/Form/types';
 import { PaletteScale } from 'src/styles/types';
 
 export const schema: ISchema = {
-  username: {
+  game: {
     value: '',
     isValid: true,
     hasFocus: false,
     validation: (value: string) => value.trim().length,
-    label: 'Nombre de usuario',
+    label: 'Juego',
+    type: 'game',
   },
-  password: {
+  datetime: {
     value: '',
     isValid: true,
     hasFocus: false,
     validation: (value: string) => value.trim().length,
-    label: 'Contraseña',
-    type: 'password',
+    label: 'Fecha y hora',
+    type: 'date',
+  },
+  location: {
+    value: '',
+    isValid: true,
+    hasFocus: false,
+    validation: (value: string) => value.trim().length,
+    label: 'Ubicación',
+    type: 'location',
+  },
+  minPlayers: {
+    value: '',
+    isValid: true,
+    hasFocus: false,
+    validation: (value: string) => value.trim().length,
+    label: 'Minimo de jugadores',
+    type: 'amount',
+  },
+  maxPlayers: {
+    value: '',
+    isValid: true,
+    hasFocus: false,
+    validation: (value: string) => value.trim().length,
+    label: 'Máximo de jugadores',
+    type: 'amount',
   },
 };
 

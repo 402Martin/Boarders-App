@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyledText } from '../StyledText';
 import { StyledTextInput } from '../StyledTextInput';
+import { GameInput } from './CustomInputs/GameInput';
+import { LocationInput } from './CustomInputs/LocationInput';
 import { styles } from './styles';
 import { ISchemaAttribute } from './types';
 
@@ -13,24 +15,34 @@ type Props = {
 const HandleInput: React.FC<Props> = (props) => {
   const { field, handleFieldsChange, handleOnFocus } = props;
   const key = props.inputKey;
-  return (
-    <>
-      <StyledTextInput
-        label={field.label}
-        style={styles.formChild}
-        key={key}
-        onChangeText={(text: string) => {
-          handleFieldsChange(text, key);
-        }}
-        secureTextEntry={field.type === 'password'}
-        validValue={field.isValid}
-        onBlur={() => handleOnFocus(key)}
-      ></StyledTextInput>
-      {!field.isValid && (
-        <StyledText style={styles.formChildError}>{field.isNotValidmessage || 'valor invalid'}</StyledText>
-      )}
-    </>
-  );
+
+  switch (field.type) {
+    case 'location':
+      return <LocationInput />;
+    case 'game':
+      return <GameInput />;
+    default:
+      return (
+        <>
+          <StyledTextInput
+            label={field.label}
+            style={styles.formChild}
+            key={key}
+            onChangeText={(text: string) => {
+              handleFieldsChange(text, key);
+            }}
+            secureTextEntry={field.type === 'password'}
+            validValue={field.isValid}
+            onBlur={() => handleOnFocus(key)}
+          ></StyledTextInput>
+          {!field.isValid && (
+            <StyledText style={styles.formChildError}>
+              {field.isNotValidmessage || 'valor invalid'}
+            </StyledText>
+          )}
+        </>
+      );
+  }
 };
 
 export default HandleInput;
