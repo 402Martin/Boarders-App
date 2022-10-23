@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'src/handler/axios.handler';
 import { IQuery, IResponse } from 'src/types/request.types';
 export default class BaseService<T extends { id: number | string }, R extends object> {
   public endpoint: string;
