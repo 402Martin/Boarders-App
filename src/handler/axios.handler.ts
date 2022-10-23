@@ -1,8 +1,13 @@
 import axiosOriginal from 'axios';
 
-const axios = axiosOriginal;
+const axios = axiosOriginal.create({
+  withCredentials: true,
+});
+
 axios.interceptors.request.use(
   function (config) {
+    console.log(config);
+    console.log('salida');
     return config;
   },
   function (error) {
@@ -18,6 +23,7 @@ axios.interceptors.response.use(
   function (error) {
     try {
       let message = error.message;
+      console.log('response');
       if (error.response.data?.errors) {
         message = error.response.data.errors;
       }
