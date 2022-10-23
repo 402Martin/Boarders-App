@@ -13,12 +13,8 @@ export default class BaseService<T extends { id: number | string }, R extends ob
     return await axios.get(`${this.endpoint}/${id}`);
   };
   public create = async (element: R) => {
-    try {
-      const res = await axios.post(this.endpoint, element);
-      return res.data as IResponse<T>;
-    } catch (err) {
-      console.log(err);
-    }
+    const res = await axios.post(this.endpoint, element);
+    return res.data as IResponse<T>;
   };
 
   public update = async (element: Partial<T>) => {

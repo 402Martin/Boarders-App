@@ -1,6 +1,7 @@
 export type QueryParams = { [key: string]: string | number | object | boolean };
 
-export interface IPaginatedResponse {
+export interface IPaginatedResponse<T> {
+  data: T;
   currentPage: number;
   hasMorePages: boolean;
   pageSize: number;
@@ -16,8 +17,9 @@ export interface IQuery {
 }
 export interface IResponse<T> {
   data: T;
-  pagination?: IPaginatedResponse;
+  message?: string;
 }
+
 export const IQueryInititaior = () => ({
   sort_by: '',
   order_by: '',
