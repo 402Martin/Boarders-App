@@ -6,8 +6,6 @@ const axios = axiosOriginal.create({
 
 axios.interceptors.request.use(
   function (config) {
-    console.log(config);
-    console.log('salida');
     return config;
   },
   function (error) {
@@ -23,15 +21,12 @@ axios.interceptors.response.use(
   function (error) {
     try {
       let message = error.message;
-      console.log('response');
       if (error.response.data?.errors) {
         message = error.response.data.errors;
       }
-      console.log('response', error.response);
-      throw error;
+      return error;
     } catch (error) {
-      console.log(error);
-      throw error;
+      return { error: 'Error desconocido' };
     }
   },
 );

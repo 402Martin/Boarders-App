@@ -10,17 +10,20 @@ import { ILogin } from 'src/types/user.types';
 import { schema, succesMessage, wrongMessage } from './schema';
 import { strings } from './strings';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useAppDispatch, userActions } from 'src/store';
 
 type Props = NativeStackScreenProps<RootStackParamList, routes.LOGIN, 'MyStack'>;
 
 const Login = ({ navigation }: Props) => {
   const [message, setMessage] = useState<IMessage | undefined>();
-
+  const dispatch = useAppDispatch();
   const submit = async (objValues: ILogin) => {
-    const user = await userService.login(objValues);
-    console.log('asd');
-    if (user) setMessage(succesMessage);
-    else setMessage(wrongMessage);
+    const data = await userService.login(objValues);
+    console.log(data);
+    if (data) {
+      setMessage(succesMessage);
+      dispatch(userActions.setUser(data));
+    } else setMessage(wrongMessage);
   };
 
   const register = async () => {

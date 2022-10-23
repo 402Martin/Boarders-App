@@ -6,7 +6,7 @@ import { RootStackParamList, routes } from 'src/navigation/routes';
 import { userService } from 'src/services/user.service';
 import { PaletteScale } from 'src/styles/types';
 import { IMessage, IUserRegister } from 'src/types/main.types';
-import { schema, succesMessage } from './schemas';
+import { errorMessage, schema, succesMessage } from './schemas';
 import { strings } from './strings';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -16,7 +16,12 @@ const Register = ({ navigation }: Props) => {
 
   const submit = async (objValues: IUserRegister) => {
     const user = await userService.create(objValues);
-    if (user) setMessage(succesMessage);
+    console.log('user', user);
+    if (user) {
+      setMessage(succesMessage);
+      navigation.navigate(routes.LOGIN);
+    }
+    setMessage(errorMessage);
   };
   const back = () => {
     navigation.navigate(routes.LOGIN);
