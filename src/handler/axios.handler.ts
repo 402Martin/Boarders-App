@@ -1,4 +1,7 @@
+import { PaletteScale } from 'src/styles/types';
 import axiosOriginal from 'axios';
+import { alarmActions } from 'src/store/alarm.slice';
+import store from 'src/store/store';
 
 const axios = axiosOriginal.create({
   withCredentials: true,
@@ -20,13 +23,22 @@ axios.interceptors.response.use(
   },
   function (error) {
     try {
-      let message = error.message;
-      if (error.response.data?.errors) {
-        message = error.response.data.errors;
-      }
-      return error;
+      console.log(error.response);
+      const message = error.response.data?.error;
+      if (!message) throw new error();
+      store.dispatch(
+        alarmActions.setAlarm({
+          message,
+          type: PaletteScale.SECONDARY_ACCENT_ERROR_RED50,
+        }),
+      );
     } catch (error) {
-      return { error: 'Error desconocido' };
+      store.dispatch(
+        alarmActions.setAlarm({
+          message: 'error desconocido',
+          type: PaletteScale.SECONDARY_ACCENT_ERROR_RED50,
+        }),
+      );
     }
   },
 );

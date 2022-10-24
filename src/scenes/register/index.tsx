@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Form from 'src/components/Form';
 import { SceneContainer } from 'src/components/SceneContainer';
 import Title from 'src/components/title';
 import { RootStackParamList, routes } from 'src/navigation/routes';
 import { userService } from 'src/services/user.service';
-import { PaletteScale } from 'src/styles/types';
-import { IMessage, IUserRegister } from 'src/types/main.types';
-import { errorMessage, schema, succesMessage } from './schemas';
+import { IUserRegister } from 'src/types/main.types';
+import { schema, succesMessage } from './schemas';
 import { strings } from './strings';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useAppDispatch } from 'src/store';
+import { alarmActions } from 'src/store/alarm.slice';
 
 type Props = NativeStackScreenProps<RootStackParamList, routes.REGISTER, 'MyStack'>;
 const Register = ({ navigation }: Props) => {
-  const [message, setMessage] = useState<IMessage | undefined>();
-
+  const dispatch = useAppDispatch();
   const submit = async (objValues: IUserRegister) => {
     const user = await userService.create(objValues);
     console.log('user', user);
     if (user) {
-      setMessage(succesMessage);
+      dispatch(alarmActions.setAlarm(succesMessage));
       navigation.navigate(routes.LOGIN);
     }
-    setMessage(errorMessage);
   };
   const back = () => {
     navigation.navigate(routes.LOGIN);
@@ -33,7 +32,7 @@ const Register = ({ navigation }: Props) => {
   return (
     <SceneContainer>
       <Title />
-      <Form<IUserRegister> schema={schema} buttons={buttons} message={message}></Form>
+      <Form<IUserRegister> schema={schema} buttons={buttons}></Form>
     </SceneContainer>
   );
 };

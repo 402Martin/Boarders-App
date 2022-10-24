@@ -1,13 +1,8 @@
 import React from 'react';
-import { NativeSyntheticEvent, Text, TextInputChangeEventData } from 'react-native';
 import { useForm } from 'src/hooks/useForm';
 import { PaletteScale } from 'src/styles/types';
 import Message from '../Message';
 import { SceneContainer } from '../SceneContainer';
-import { StyledText } from '../StyledText';
-import { StyledTextInput } from '../StyledTextInput';
-import { StyledTouchable } from '../StyledTouchable';
-import StyledTouchableAlternate from '../StyledTouchableAlternate';
 import { StyledView } from '../StyledView';
 import HandleButton from './HandleButton';
 import HandleInput from './HandleInput';
