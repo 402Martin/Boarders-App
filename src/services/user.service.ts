@@ -10,7 +10,8 @@ export class UserService extends BaseService<User, IUserRegister> {
   }
 
   login = async (user: ILogin) => {
-    return (await axios.post(endpoints.login, user)).data;
+    const data = await axios.post(endpoints.login, user);
+    return data;
   };
 }
 
