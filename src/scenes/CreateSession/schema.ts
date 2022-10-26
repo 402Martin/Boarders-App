@@ -10,6 +10,7 @@ export const schema: ISchema = {
     label: 'Juego',
     isNotValidmessage: 'El juego es requerido',
     type: 'game',
+    isDisabled: true,
   },
   datetime: {
     value: '',

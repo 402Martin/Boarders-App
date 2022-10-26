@@ -27,9 +27,7 @@ const Form = <T extends object>(props: Props<T>) => {
     schema,
     notify,
   );
-  useEffect(() => {
-    console.log(isValid);
-  }, [isValid]);
+
   return (
     <SceneContainer style={styles.container}>
       <StyledView style={styles.form}>

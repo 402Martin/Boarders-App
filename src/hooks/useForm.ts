@@ -36,7 +36,7 @@ export const useForm = <T extends object>(initialState: ISchema, handleNotify?: 
   const handleValidity = () => {
     let isValidProps = true;
     Object.keys(fields).forEach((key) => {
-      if (!fields[key].isValid || !fields[key].hasFocus) {
+      if ((!fields[key].isValid || !fields[key].hasFocus) && !fields[key].isDisabled) {
         isValidProps = false;
         return;
       }

@@ -32,6 +32,7 @@ export interface ISchemaAttribute {
   label?: string;
   transformToNumber?: boolean;
   notify?: boolean;
+  isDisabled?: boolean;
 }
 
 export interface IButonSchema {

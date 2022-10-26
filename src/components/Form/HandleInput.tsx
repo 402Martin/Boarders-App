@@ -18,9 +18,9 @@ const HandleInput: React.FC<Props> = (props) => {
 
   switch (field.type) {
     case 'location':
-      return <LocationInput />;
+      return <LocationInput disabled={field.isDisabled} />;
     case 'game':
-      return <GameInput />;
+      return <GameInput disabled={field.isDisabled} />;
     default:
       return (
         <>
@@ -34,6 +34,7 @@ const HandleInput: React.FC<Props> = (props) => {
             secureTextEntry={field.type === 'password'}
             validValue={field.isValid}
             onBlur={() => handleOnFocus(key)}
+            disabled={field.isDisabled}
           ></StyledTextInput>
           {!field.isValid && (
             <StyledText style={styles.formChildError}>
