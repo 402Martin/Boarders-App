@@ -21,7 +21,8 @@ const Login = ({ navigation }: Props) => {
     const data = await userService.login(objValues);
     if (data) {
       dispatch(alarmActions.setAlarm(succesMessage));
-      dispatch(userActions.setUser(data));
+      console.log(data);
+      dispatch(userActions.setUser(data.data));
     }
   };
 
