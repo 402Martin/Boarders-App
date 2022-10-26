@@ -7,7 +7,7 @@ import { StyledView } from '../StyledView';
 import { styles } from './styles';
 
 const Alarm = () => {
-  const alarm = useAppSelector((state) => state.alarm);
+  const alarm = useAppSelector((state: { alarm: any }) => state.alarm);
   const dispatch = useAppDispatch();
   const [isAlarmActive, setIsAlarmActive] = useState<boolean>(false);
   useEffect(() => {
