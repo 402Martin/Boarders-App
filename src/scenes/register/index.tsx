@@ -16,7 +16,6 @@ const Register = ({ navigation }: Props) => {
   const dispatch = useAppDispatch();
   const submit = async (objValues: IUserRegister) => {
     const user = await userService.create(objValues);
-    console.log('user', user);
     if (user) {
       dispatch(alarmActions.setAlarm(succesMessage));
       navigation.navigate(routes.LOGIN);
