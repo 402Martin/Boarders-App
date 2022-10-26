@@ -1,7 +1,7 @@
 export const strings = {
   buttons: {
     createSession: {
-      text: 'Create Session',
+      text: 'Crear sesión',
       type: 'normal',
     },
   },

@@ -6,31 +6,35 @@ export const schema: ISchema = {
     value: '',
     isValid: true,
     hasFocus: false,
-    validation: (value: string) => value.trim().length,
+    validation: (value: string) => !!value.trim().length,
     label: 'Juego',
+    isNotValidmessage: 'El juego es requerido',
     type: 'game',
   },
   datetime: {
     value: '',
     isValid: true,
     hasFocus: false,
-    validation: (value: string) => value.trim().length,
+    isNotValidmessage: 'La fecha es requerida',
+    validation: (value: string) => !!value.trim().length,
     label: 'Fecha y hora',
     type: 'date',
   },
   location: {
     value: '',
     isValid: true,
+    isNotValidmessage: 'La ubicación es requerida',
     hasFocus: false,
-    validation: (value: string) => value.trim().length,
+    validation: (value: string) => !!value.trim().length,
     label: 'Ubicación',
-    type: 'location',
+    type: 'text',
   },
   minPlayers: {
     value: '',
     isValid: true,
     hasFocus: false,
-    validation: (value: string) => value.trim().length,
+    isNotValidmessage: 'El número mínimo de jugadores es requerido',
+    validation: (value: string) => !!value.trim().length,
     label: 'Minimo de jugadores',
     type: 'amount',
   },
@@ -38,7 +42,8 @@ export const schema: ISchema = {
     value: '',
     isValid: true,
     hasFocus: false,
-    validation: (value: string) => value.trim().length,
+    isNotValidmessage: 'El número máximo de jugadores es requerido',
+    validation: (value: string) => !!value.trim().length,
     label: 'Máximo de jugadores',
     type: 'amount',
   },
@@ -46,10 +51,10 @@ export const schema: ISchema = {
 
 export const succesMessage = {
   type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
-  message: 'Registro Exitoso',
+  message: 'Sesion creada con éxito',
 };
 
 export const wrongMessage = {
   type: PaletteScale.SECONDARY_ACCENT_ERROR_RED50,
-  message: 'Credenciales Incorrectas',
+  message: 'Ocurrio un problema al crear la sesión',
 };
