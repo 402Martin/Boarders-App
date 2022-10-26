@@ -1,4 +1,4 @@
-export const api = 'http://192.168.112.1:3001';
+export const api = 'http://192.168.1.226:3001';
 
 export const endpoints = {
   users: `${api}/users`,
