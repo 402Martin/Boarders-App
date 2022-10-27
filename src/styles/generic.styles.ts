@@ -10,4 +10,8 @@ export const genericStyles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
   },
+
+  transparent: {
+    backgroundColor: 'transparent',
+  },
 });
