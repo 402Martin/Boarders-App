@@ -22,8 +22,8 @@ const Navbar = () => {
       })}
     >
       <Tab.Screen
-        name={routes.MYSESSION}
-        component={MySessions}
+        name={routes.MYPROFILE}
+        component={MyProfile}
         options={{
           tabBarIcon: ({ focused, color, size }) => {
             return (
@@ -37,6 +37,7 @@ const Navbar = () => {
               />
             );
           },
+          tabBarLabel: 'My Profile',
         }}
       />
       <Tab.Screen
@@ -55,11 +56,12 @@ const Navbar = () => {
               />
             );
           },
+          tabBarLabel: 'Search',
         }}
       />
       <Tab.Screen
-        name={routes.MYPROFILE}
-        component={MyProfile}
+        name={routes.MYSESSION}
+        component={MySessions}
         options={{
           tabBarIcon: ({ focused, color, size }) => {
             return (
@@ -73,6 +75,7 @@ const Navbar = () => {
               />
             );
           },
+          tabBarLabel: 'My Session',
         }}
       />
     </Tab.Navigator>

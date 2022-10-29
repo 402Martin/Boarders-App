@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     left: '5%',
     bottom: '5%',
     zIndex: 1,
+    backgroundColor: 'transperent',
   },
 
   message: {
