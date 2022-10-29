@@ -60,7 +60,7 @@ const Navbar = () => {
       />
       <Tab.Screen
         name={routes.MYSESSION}
-        component={MySessions}
+        component={PendingRequests}
         options={{
           tabBarIcon: ({ focused, color, size }) => {
             return (

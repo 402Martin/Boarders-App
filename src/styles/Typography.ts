@@ -31,7 +31,7 @@ export const Typography: TypographyStyle<TextStyle> = {
   [TypographyScale.PARAGRAPH_REGULAR2]: {
     fontFamily: 'Nunito-Regular',
     // Design reference: `fontSize: 16`
-    fontSize: normalizedFontSize(1.9),
+    fontSize: normalizedFontSize(2.2),
     fontWeight: '400',
   },
   [TypographyScale.PARAGRAPH_BOLD2]: {
