@@ -21,7 +21,7 @@ export const schema: ISchema = {
 
 export const succesMessage = {
   type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
-  message: 'Registro Exitoso',
+  message: 'Login Exitoso',
 };
 
 export const wrongMessage = {
