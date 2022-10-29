@@ -8,8 +8,8 @@ export class SessionService extends BaseService<Session, ISessionForm> {
     super(endpoints.users);
   }
 
-  createSession = async (user: ISessionForm) => {
-    return (await axios.post(endpoints.login, user)).data;
+  createSession = async (session: ISessionForm) => {
+    return (await axios.post(endpoints.createGameSession, session)).data;
   };
 }
 

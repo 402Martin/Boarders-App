@@ -5,4 +5,5 @@ export const strings = {
       type: 'normal',
     },
   },
+  title: 'Crear sesión',
 };

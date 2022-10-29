@@ -18,9 +18,10 @@ const Login = ({ navigation }: Props) => {
 
   const submit = async (objValues: ILogin) => {
     const user = await userService.login(objValues);
-    console.log('asd');
-    if (user) setMessage(succesMessage);
-    else setMessage(wrongMessage);
+    if (user) {
+      setMessage(succesMessage);
+      navigation.navigate(routes.CREATE_SESSION);
+    } else setMessage(wrongMessage);
   };
 
   const register = async () => {

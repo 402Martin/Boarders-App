@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyledText } from '../StyledText';
 import { StyledTextInput } from '../StyledTextInput';
-import { GameInput } from './CustomInputs/GameInput';
-import { LocationInput } from './CustomInputs/LocationInput';
 import { styles } from './styles';
 import { ISchemaAttribute } from './types';
 
@@ -17,10 +15,6 @@ const HandleInput: React.FC<Props> = (props) => {
   const key = props.inputKey;
 
   switch (field.type) {
-    case 'location':
-      return <LocationInput disabled={field.isDisabled} />;
-    case 'game':
-      return <GameInput disabled={field.isDisabled} />;
     default:
       return (
         <>

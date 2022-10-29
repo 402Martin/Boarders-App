@@ -2,24 +2,23 @@ import { ISchema } from 'src/components/Form/types';
 import { PaletteScale } from 'src/styles/types';
 
 export const schema: ISchema = {
-  game: {
+  gameTitle: {
     value: '',
     isValid: true,
     hasFocus: false,
     validation: (value: string) => !!value.trim().length,
     label: 'Juego',
     isNotValidmessage: 'El juego es requerido',
-    type: 'game',
-    isDisabled: true,
+    type: 'text',
   },
-  datetime: {
+  date: {
     value: '',
     isValid: true,
     hasFocus: false,
     isNotValidmessage: 'La fecha es requerida',
     validation: (value: string) => !!value.trim().length,
     label: 'Fecha y hora',
-    type: 'date',
+    type: 'text',
   },
   location: {
     value: '',
@@ -30,7 +29,7 @@ export const schema: ISchema = {
     label: 'Ubicación',
     type: 'text',
   },
-  minPlayers: {
+  minQuantityPlayers: {
     value: '',
     isValid: true,
     hasFocus: false,
@@ -39,7 +38,7 @@ export const schema: ISchema = {
     label: 'Minimo de jugadores',
     type: 'amount',
   },
-  maxPlayers: {
+  maxQuantityPlayers: {
     value: '',
     isValid: true,
     hasFocus: false,
@@ -47,6 +46,15 @@ export const schema: ISchema = {
     validation: (value: string) => !!value.trim().length,
     label: 'Máximo de jugadores',
     type: 'amount',
+  },
+
+  description: {
+    value: '',
+    isValid: true,
+    hasFocus: false,
+    validation: (value: string) => true,
+    label: 'Descripción',
+    type: 'text',
   },
 };
 

@@ -1,20 +1,21 @@
 import { User } from './user.types';
 
 export interface ISessionForm {
-  game: string;
-  datetime: Date;
+  gameTitle: string;
+  date: Date;
+  description: string;
   location: string;
-  maxPlayers: number;
-  minPlayers: number;
+  maxQuantityPlayers: number;
+  minQuantityPlayers: number;
 }
 
 export type Session = {
   id: number;
-  game: string;
-  datetime: Date;
+  gameTitle: string;
+  date: Date;
   location: string;
-  maxPlayers: number;
-  minPlayers: number;
+  maxQuantityPlayers: number;
+  minQuantityPlayers: number;
   players: User[];
   host: User;
 };

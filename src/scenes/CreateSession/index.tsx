@@ -18,10 +18,10 @@ const CreateSessionScene = ({ navigation }: Props) => {
   const [message, setMessage] = useState<IMessage | undefined>();
 
   const submit = async (objValues: ISessionForm) => {
+    console.log(objValues);
     const session = await sessionService.createSession(objValues);
-    //if (session) {
-    setMessage(succesMessage);
-    // setMessage(wrongMessage);
+    if (session) setMessage(succesMessage);
+    else setMessage(wrongMessage);
   };
 
   const buttons = [{ ...strings.buttons.createSession, isSubmit: true, onClick: submit }];
@@ -40,7 +40,7 @@ const CreateSessionScene = ({ navigation }: Props) => {
           typography={TypographyScale.HEADING_BOLD2}
           style={{ textAlign: 'center' }}
         >
-          Crear Sesion
+          {strings.title}
         </StyledText>
         <Form<ISessionForm> schema={schema} buttons={buttons} message={message}></Form>
       </StyledView>

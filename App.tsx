@@ -26,7 +26,7 @@ const App = () => {
     <NavigationContainer>
       <StyledView style={styles.sceneContainer}>
         <Stack.Navigator
-          initialRouteName={routes.CREATE_SESSION}
+          initialRouteName={routes.LOGIN}
           screenOptions={{
             headerShown: false,
           }}
