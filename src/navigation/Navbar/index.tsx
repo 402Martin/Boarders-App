@@ -9,6 +9,7 @@ import searchIcon from 'src/assets/icons/searchIcon.png';
 import iconLogo from 'src/assets/icons/iconLogo.png';
 
 import { Image } from 'react-native';
+import PendingRequests from 'src/scenes/MySessions/PendingRequests';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,8 +17,6 @@ const Navbar = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
         headerShown: false,
       })}
     >
@@ -37,7 +36,7 @@ const Navbar = () => {
               />
             );
           },
-          tabBarLabel: 'My Profile',
+          tabBarLabel: 'Mi perfil',
         }}
       />
       <Tab.Screen
@@ -56,12 +55,12 @@ const Navbar = () => {
               />
             );
           },
-          tabBarLabel: 'Search',
+          tabBarLabel: 'Busqueda',
         }}
       />
       <Tab.Screen
         name={routes.MYSESSION}
-        component={MySessions}
+        component={PendingRequests}
         options={{
           tabBarIcon: ({ focused, color, size }) => {
             return (
@@ -75,8 +74,16 @@ const Navbar = () => {
               />
             );
           },
-          tabBarLabel: 'My Session',
+          tabBarLabel: 'Mis sessiones',
         }}
+      />
+
+      <Tab.Screen
+        name={routes.PENDINGREQUEST}
+        component={PendingRequests}
+        options={({ route }) => ({
+          tabBarButton: () => null,
+        })}
       />
     </Tab.Navigator>
   );
