@@ -41,12 +41,14 @@ export const styles = StyleSheet.create({
     height: '100%',
     display: 'flex',
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   form: {
     display: 'flex',
     width: '80%',
     height: '95%',
     paddingTop: '10%',
+    backgroundColor: 'transparent',
   },
   formChild: {
     marginTop: '2%',

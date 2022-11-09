@@ -10,3 +10,8 @@ export interface IMessage {
   message: string;
   type: PaletteScale;
 }
+
+export interface IAlarm {
+  message: string;
+  type?: PaletteScale;
+}

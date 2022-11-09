@@ -37,3 +37,8 @@ export const succesMessage = {
   type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
   message: 'Registro Exitoso',
 };
+
+export const errorMessage = {
+  type: PaletteScale.SECONDARY_ACCENT_ERROR_RED50,
+  message: 'Usuario y/o mail invalido',
+};

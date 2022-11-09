@@ -13,6 +13,8 @@ export default class BaseService<T extends { id: number | string }, R extends ob
     return await axios.get(`${this.endpoint}/${id}`);
   };
   public create = async (element: R) => {
+    console.log('asd');
+    console.log(this.endpoint);
     const res = await axios.post(this.endpoint, element);
     return res.data as IResponse<T>;
   };
