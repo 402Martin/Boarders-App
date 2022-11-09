@@ -31,6 +31,7 @@ const Alarm = () => {
           <Message
             message={alarm.message || ''}
             color={alarm?.type || PaletteScale.SECONDARY_ACCENT_ERROR_RED50}
+            backgroundColor={alarm?.type || PaletteScale.SECONDARY_ACCENT_ERROR_RED50}
           ></Message>
         </StyledView>
       )}
