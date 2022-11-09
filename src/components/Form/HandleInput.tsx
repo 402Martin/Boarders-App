@@ -13,24 +13,31 @@ type Props = {
 const HandleInput: React.FC<Props> = (props) => {
   const { field, handleFieldsChange, handleOnFocus } = props;
   const key = props.inputKey;
-  return (
-    <>
-      <StyledTextInput
-        label={field.label}
-        style={styles.formChild}
-        key={key}
-        onChangeText={(text: string) => {
-          handleFieldsChange(text, key);
-        }}
-        secureTextEntry={field.type === 'password'}
-        validValue={field.isValid}
-        onBlur={() => handleOnFocus(key)}
-      ></StyledTextInput>
-      {!field.isValid && (
-        <StyledText style={styles.formChildError}>{field.isNotValidmessage || 'valor invalid'}</StyledText>
-      )}
-    </>
-  );
+
+  switch (field.type) {
+    default:
+      return (
+        <>
+          <StyledTextInput
+            label={field.label}
+            style={styles.formChild}
+            key={key}
+            onChangeText={(text: string) => {
+              handleFieldsChange(text, key);
+            }}
+            secureTextEntry={field.type === 'password'}
+            validValue={field.isValid}
+            onBlur={() => handleOnFocus(key)}
+            disabled={field.isDisabled}
+          ></StyledTextInput>
+          {!field.isValid && (
+            <StyledText style={styles.formChildError}>
+              {field.isNotValidmessage || 'valor invalid'}
+            </StyledText>
+          )}
+        </>
+      );
+  }
 };
 
 export default HandleInput;

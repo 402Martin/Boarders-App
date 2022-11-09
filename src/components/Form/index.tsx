@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { NativeSyntheticEvent, Text, TextInputChangeEventData } from 'react-native';
 import { useForm } from 'src/hooks/useForm';
 import { PaletteScale } from 'src/styles/types';
 import Message from '../Message';
@@ -22,6 +23,7 @@ const Form = <T extends object>(props: Props<T>) => {
     schema,
     notify,
   );
+
   return (
     <SceneContainer style={styles.container}>
       <StyledView style={styles.form}>
