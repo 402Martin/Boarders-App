@@ -14,6 +14,9 @@ export interface IQuery {
   order_by?: string;
   page?: number;
   page_size?: number;
+  filters?: {
+    [key: string]: any;
+  };
 }
 export interface IResponse<T> {
   data: T;

@@ -55,6 +55,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    textAlign: 'center',
   },
   button: {
     backgroundColor: 'transparent',
@@ -71,6 +72,12 @@ export const styles = StyleSheet.create({
   },
 
   info: {
-    width: '50%',
+    width: 200,
+  },
+
+  text: {
+    ...Typography.PARAGRAPH_REGULAR2,
+    width: '100%',
+    textAlign: 'center',
   },
 });

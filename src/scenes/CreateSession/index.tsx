@@ -11,17 +11,20 @@ import { StyledText } from 'src/components/StyledText';
 import { StyledView } from 'src/components/StyledView';
 import { PaletteScale, TypographyScale } from 'src/styles/types';
 import { ISessionForm } from 'src/types/session.types';
+import { useNavigation } from '@react-navigation/native';
 
-type Props = NativeStackScreenProps<RootStackParamList, routes.CREATE_SESSION, 'MyStack'>;
-
-const CreateSessionScene = ({ navigation }: Props) => {
+const CreateSessionScene = () => {
   const [message, setMessage] = useState<IMessage | undefined>();
+  const { navigate } = useNavigation();
 
   const submit = async (objValues: ISessionForm) => {
-    console.log(objValues);
     const session = await sessionService.createSession(objValues);
-    if (session) setMessage(succesMessage);
-    else setMessage(wrongMessage);
+    if (session) {
+      setMessage(succesMessage);
+      setTimeout(() => {
+        navigate(routes.MYSESSION);
+      }, 500);
+    } else setMessage(wrongMessage);
   };
 
   const buttons = [{ ...strings.buttons.createSession, isSubmit: true, onClick: submit }];
@@ -33,6 +36,7 @@ const CreateSessionScene = ({ navigation }: Props) => {
           flexDirection: 'column',
           justifyContent: 'center',
           margin: 30,
+          backgroundColor: 'transparent',
         }}
       >
         <StyledText
