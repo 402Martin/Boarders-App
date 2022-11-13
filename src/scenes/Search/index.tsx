@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import List from './List';
 import { SceneContainer } from 'src/components/SceneContainer';
 import { styles } from './styles';
 import Filters from './Filters';
+import { sessionService } from 'src/services';
+import { GameSession } from 'src/types/session.types';
 
-const dummy = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const Search = () => {
+  const [sessions, setSessions] = useState<GameSession[]>([]);
+
+  const fetchData = async () => {
+    const res = await sessionService.getAll();
+    setSessions(res.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <SceneContainer style={styles.container}>
       <Filters />
-      <List data={dummy} />
+      <List data={sessions} />
     </SceneContainer>
   );
 };

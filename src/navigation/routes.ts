@@ -15,4 +15,5 @@ export type RootStackParamList = {
   mySession: undefined;
   myprofile: undefined;
   search: undefined;
+  pendingrequest: { id: number };
 };

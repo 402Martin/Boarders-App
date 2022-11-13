@@ -1,11 +1,11 @@
 import axios from 'src/handler/axios.handler';
-import { ISessionForm, Session } from 'src/types/session.types';
+import { GameSession, ISessionForm, Session } from 'src/types/session.types';
 import BaseService from './base.service';
 import { endpoints } from './endpoints';
 
-export class SessionService extends BaseService<Session, ISessionForm> {
+export class SessionService extends BaseService<GameSession, ISessionForm> {
   constructor() {
-    super(endpoints.users);
+    super(endpoints.createGameSession);
   }
 
   createSession = async (session: ISessionForm) => {

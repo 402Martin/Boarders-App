@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import List from './List';
 import { SceneContainer } from 'src/components/SceneContainer';
 import { styles } from './styles';
 import { StyledTouchable } from 'src/components/StyledTouchable';
 import { StyledText } from 'src/components/StyledText';
-
-const dummy = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import { Typography } from 'src/styles/Typography';
+import { TypographyScale } from 'src/styles/types';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList, routes } from 'src/navigation/routes';
+import { strings } from './string';
+import { sessionService } from 'src/services';
+import { GameSession } from 'src/types/session.types';
+import { useAppSelector } from 'src/store';
 const Search = () => {
+  const [sessions, setSessions] = useState<GameSession[]>([]);
+  const user = useAppSelector((state) => state.user);
+
+  const { navigate } = useNavigation();
+  const handleNewSession = () => {
+    navigate(routes.CREATE_SESSION);
+  };
+  const fetchData = async () => {
+    const filters = {
+      filters: {
+        userId: user?.id,
+      },
+    };
+    const res = await sessionService.getAll({ filters });
+    setSessions(res.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <SceneContainer style={styles.container}>
-      <List data={dummy} />
-      <StyledTouchable style={styles.button}>
-        <StyledText>{'Crear una partida'}</StyledText>
+      <List data={sessions} />
+      <StyledTouchable style={styles.button} onPress={handleNewSession}>
+        <StyledText typography={TypographyScale.HEADING_BOLD2}>{strings.button}</StyledText>
       </StyledTouchable>
     </SceneContainer>
   );

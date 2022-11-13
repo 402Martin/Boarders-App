@@ -21,8 +21,10 @@ const Login = ({ navigation }: Props) => {
     const data = await userService.login(objValues);
     if (data) {
       dispatch(alarmActions.setAlarm(succesMessage));
-      console.log(data);
-      dispatch(userActions.setUser(data.data));
+
+      const date = new Date();
+      date.setHours(date.getHours() + 1);
+      dispatch(userActions.setUser({ ...data.data, date: date.getTime() }));
     }
   };
 
