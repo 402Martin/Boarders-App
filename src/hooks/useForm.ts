@@ -22,6 +22,7 @@ export const useForm = <T extends object>(initialState: ISchema, handleNotify?: 
 
   const handleOnFocus = (key: string) => {
     if (!key) return;
+
     const oldElem = { ...fields[key] };
     const newElem = {
       ...oldElem,
@@ -60,6 +61,7 @@ export const useForm = <T extends object>(initialState: ISchema, handleNotify?: 
     setValues(newState);
   };
   useEffect(() => {
+    console.log(fields);
     handleValidity();
   }, [fields]);
 

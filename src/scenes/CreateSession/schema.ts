@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { ISchema } from 'src/components/Form/types';
 import { PaletteScale } from 'src/styles/types';
 
@@ -16,9 +17,9 @@ export const schema: ISchema = {
     isValid: true,
     hasFocus: false,
     isNotValidmessage: 'La fecha es requerida',
-    validation: (value: string) => !!value.trim().length,
+    validation: (value: string) => moment(value, 'DD/MM/YYYY HH:mm').isAfter(moment(), 'day'),
     label: 'Fecha y hora',
-    type: 'text',
+    type: 'date',
   },
   location: {
     value: '',
