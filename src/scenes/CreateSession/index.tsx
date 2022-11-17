@@ -18,7 +18,6 @@ const CreateSessionScene = ({ navigation }: Props) => {
   const [message, setMessage] = useState<IMessage | undefined>();
 
   const submit = async (objValues: ISessionForm) => {
-    console.log(objValues);
     const session = await sessionService.createSession(objValues);
     if (session) setMessage(succesMessage);
     else setMessage(wrongMessage);
