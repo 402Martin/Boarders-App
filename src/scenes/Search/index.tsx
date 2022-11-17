@@ -5,12 +5,13 @@ import { styles } from './styles';
 import Filters from './Filters';
 import { sessionService } from 'src/services';
 import { GameSession } from 'src/types/session.types';
+import { Filters as FiltersType } from 'src/types/main.types';
 
 const Search = () => {
   const [sessions, setSessions] = useState<GameSession[]>([]);
 
-  const fetchData = async () => {
-    const res = await sessionService.getAll();
+  const fetchData = async (filters?: FiltersType) => {
+    const res = await sessionService.getAll(filters);
     setSessions(res.data);
   };
 
@@ -19,7 +20,7 @@ const Search = () => {
   }, []);
   return (
     <SceneContainer style={styles.container}>
-      <Filters />
+      <Filters setData={fetchData} />
       <List data={sessions} setData={fetchData} />
     </SceneContainer>
   );
