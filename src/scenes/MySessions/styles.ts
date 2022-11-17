@@ -49,6 +49,12 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
     width: '60%',
   },
+
+  inputButtons: {
+    TextTransform: 'uppercase',
+    width: '45%',
+    marginTop: 10,
+  },
   rowHeaderButtonText: {
     ...Typography.BUTTON,
     fontWeight: '600',
@@ -61,6 +67,18 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     paddingHorizontal: 5,
+  },
+
+  rowInputs: {
+    ...genericStyles.transparent,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: 5,
+    flexWrap: 'wrap',
+    marginTop: 0,
+    marginBottom: 0,
   },
   rowHeaderAdditionalInfoText: {
     ...Typography.PARAGRAPH_REGULAR2,

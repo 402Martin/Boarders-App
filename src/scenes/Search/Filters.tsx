@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Image } from 'react-native';
 import { StyledContainer } from 'src/components/StyledContainer';
 import searchIcon from 'src/assets/icons/searchIcon.png';
 import dateIcon from 'src/assets/icons/dateIcon.png';
 import locationIcon from 'src/assets/icons/locationIcon.png';
 import { styles } from './styles';
-import { StyledTextInput } from 'src/components/StyledTextInput';
 import { StyledTouchable } from 'src/components/StyledTouchable';
-import { StyledText } from 'src/components/StyledText';
 import HandleInputs from './HandleInputs';
 import { FilterParam, Filters } from 'src/types/main.types';
-import { sessionService } from 'src/services';
 import { Filters as FiltersType } from 'src/types/main.types';
 
 type Props = {

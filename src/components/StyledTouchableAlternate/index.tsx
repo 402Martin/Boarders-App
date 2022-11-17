@@ -9,18 +9,19 @@ type CustomButtonProps = {
   children?: React.ReactNode;
   dark?: boolean;
   style?: any;
+  color?: PaletteScale;
 } & TouchableHighlightProps;
 
 const StyledTouchableAlternate: React.FC<CustomButtonProps> = (props) => {
-  const { children, onPress } = props;
+  const { children, onPress, color } = props;
   return (
     <StyledTouchable
       dark={props.dark}
-      borderColor={PaletteScale.PRIMARY_FIRST}
+      borderColor={color || PaletteScale.PRIMARY_FIRST}
       style={{ ...styles.alternate, ...props.style }}
       onPress={onPress}
     >
-      <StyledText color={PaletteScale.PRIMARY_FIRST} style={styles.textStyles}>
+      <StyledText color={color || PaletteScale.PRIMARY_FIRST} style={styles.textStyles}>
         {children}
       </StyledText>
     </StyledTouchable>
