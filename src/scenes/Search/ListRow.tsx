@@ -9,7 +9,7 @@ import { routes } from 'src/navigation/routes';
 import { requestService } from 'src/services/request.service';
 import { useAppSelector } from 'src/store';
 import { PaletteScale, TypographyScale } from 'src/styles/types';
-import { Filters } from 'src/types/main.types';
+import { FilterParam, Filters } from 'src/types/main.types';
 import { RequestStatus } from 'src/types/request.model.types';
 import { GameSession } from 'src/types/session.types';
 import { styles } from './styles';
@@ -17,7 +17,7 @@ import { styles } from './styles';
 type Props = {
   data: GameSession;
   style?: object;
-  setData: (filters?: Filters) => void;
+  setData: (filters?: FilterParam) => void;
 };
 
 const ListRow: React.FC<Props> = (props) => {

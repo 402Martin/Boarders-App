@@ -4,7 +4,7 @@ import { StyledContainer } from 'src/components/StyledContainer';
 import { StyledText } from 'src/components/StyledText';
 import StyledTouchableAlternate from 'src/components/StyledTouchableAlternate';
 import { PaletteScale, TypographyScale } from 'src/styles/types';
-import { Filters } from 'src/types/main.types';
+import { FilterParam, Filters } from 'src/types/main.types';
 import { GameSession } from 'src/types/session.types';
 import ListRow from './ListRow';
 import { styles } from './styles';
@@ -12,7 +12,7 @@ import { styles } from './styles';
 type Props = {
   data: GameSession[];
   style?: StyleProp<ViewStyle>;
-  setData: (filters?: Filters) => {};
+  setData: (filters?: FilterParam) => {};
 };
 
 const List: React.FC<Props> = (props) => {

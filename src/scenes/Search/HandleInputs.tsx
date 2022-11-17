@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { StyledContainer } from 'src/components/StyledContainer';
 import { StyledText } from 'src/components/StyledText';
@@ -16,11 +17,28 @@ const HandleInputs = (props: Props) => {
   const [activeFilter, setActiveFilter] = useState<{ value: string; label: string } | null>(null);
   const { handleFetchData, active, filters, setFilters } = props;
 
-  const handleFieldsChange = (value: string) => {
+  const handleFieldsChange = (text: string) => {
+    let value = text;
     if (!activeFilter || !active || !filters) return;
+
+    if (active === 'from' || active === 'to') value = handleOnDateChange(value);
     setActiveFilter({ ...activeFilter, value });
     const newFilters = { ...filters, [active]: { ...activeFilter, value } };
     setFilters(newFilters);
+  };
+
+  const handleOnDateChange = (dateIn: string) => {
+    if (dateIn.length === 0) return '';
+    const unMaskedDate = dateIn.replace(/\D/g, '');
+    if (unMaskedDate !== '0' && !Number(unMaskedDate)) return '';
+    const split = unMaskedDate.match(/.{1,2}/g) ?? [];
+    if (split.length > 3) return '';
+
+    const maskedDate = split.join('/');
+
+    if (split.length === 3 && !moment(maskedDate, 'DD/MM/YY').isValid()) return '';
+
+    return maskedDate;
   };
 
   useEffect(() => {
@@ -35,6 +53,7 @@ const HandleInputs = (props: Props) => {
           handleFieldsChange(text);
         }}
         value={activeFilter?.value || ''}
+        placeholder={active === 'from' || active === 'to' ? 'DD/MM/YY' : undefined}
       ></StyledTextInput>
 
       <StyledTouchable
