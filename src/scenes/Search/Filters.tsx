@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 import { StyledContainer } from 'src/components/StyledContainer';
 import searchIcon from 'src/assets/icons/searchIcon.png';
+import dateIcon from 'src/assets/icons/dateIcon.png';
+import locationIcon from 'src/assets/icons/locationIcon.png';
 import { styles } from './styles';
 import { StyledTextInput } from 'src/components/StyledTextInput';
 import { StyledTouchable } from 'src/components/StyledTouchable';
@@ -39,27 +41,27 @@ const filters = (props: Props) => {
       <StyledContainer style={styles.filters}>
         <StyledTouchable
           style={styles.touchableFilter}
-          onPress={() => setActive((act) => (act ? null : 'location'))}
+          onPress={() => setActive((act) => (act === 'location' ? null : 'location'))}
         >
           <Image style={styles.filterImg} source={searchIcon} />
         </StyledTouchable>
         <StyledTouchable
           style={styles.touchableFilter}
-          onPress={() => setActive((act) => (act ? null : 'gameTitle'))}
+          onPress={() => setActive((act) => (act === 'gameTitle' ? null : 'gameTitle'))}
         >
-          <Image style={styles.filterImg} source={searchIcon} />
+          <Image style={styles.filterImg} source={locationIcon} />
         </StyledTouchable>
         <StyledTouchable
           style={styles.touchableFilter}
-          onPress={() => setActive((act) => (act ? null : 'from'))}
+          onPress={() => setActive((act) => (act === 'from' ? null : 'from'))}
         >
-          <Image style={styles.filterImg} source={searchIcon} />
+          <Image style={styles.filterImg} source={dateIcon} />
         </StyledTouchable>
         <StyledTouchable
           style={styles.touchableFilter}
-          onPress={() => setActive((act) => (act ? null : 'to'))}
+          onPress={() => setActive((act) => (act === 'to' ? null : 'to'))}
         >
-          <Image style={styles.filterImg} source={searchIcon} />
+          <Image style={styles.filterImg} source={dateIcon} />
         </StyledTouchable>
       </StyledContainer>
       {active && (

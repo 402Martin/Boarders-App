@@ -121,6 +121,7 @@ export const styles = StyleSheet.create({
     width: 25,
     backgroundColor: 'transparent',
     alignSelf: 'center',
+    resizeMode: 'contain',
   },
 
   evenFilter: {
