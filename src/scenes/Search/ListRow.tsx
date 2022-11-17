@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { StyleProp, Text, ViewStyle } from 'react-native';
 import { StyledContainer } from 'src/components/StyledContainer';
@@ -8,6 +9,7 @@ import { routes } from 'src/navigation/routes';
 import { requestService } from 'src/services/request.service';
 import { useAppSelector } from 'src/store';
 import { PaletteScale, TypographyScale } from 'src/styles/types';
+import { FilterParam, Filters } from 'src/types/main.types';
 import { RequestStatus } from 'src/types/request.model.types';
 import { GameSession } from 'src/types/session.types';
 import { styles } from './styles';
@@ -15,7 +17,7 @@ import { styles } from './styles';
 type Props = {
   data: GameSession;
   style?: object;
-  setData: () => void;
+  setData: (filters?: FilterParam) => void;
 };
 
 const ListRow: React.FC<Props> = (props) => {
@@ -76,12 +78,10 @@ const ListRow: React.FC<Props> = (props) => {
       </StyledContainer>
       <StyledContainer style={styles.rowHeaderAdditionalInfo}>
         <Text style={styles.rowHeaderAdditionalInfoText}>{data.location}</Text>
-        <Text
-          style={styles.rowHeaderAdditionalInfoText}
-        >{`${data.minQuantityPlayers}/${data.maxQuantityPlayers}`}</Text>
-        {/* <Text style={styles.rowHeaderAdditionalInfoText}>5/6</Text> */}
-        {/* <Text style={styles.rowHeaderAdditionalInfoText}>12/10 14:00</Text> */}
-        <Text style={styles.rowHeaderAdditionalInfoText}>{data.date.toLocaleString()}</Text>
+        <Text style={styles.rowHeaderAdditionalInfoText}>{`${
+          data.requests?.filter((x) => x.status === RequestStatus.ACCEPTED).length || 0
+        }/${data.maxQuantityPlayers}`}</Text>
+        <Text style={styles.rowHeaderAdditionalInfoText}>{moment(data.date).format('DD/MM HH:mm')}</Text>
       </StyledContainer>
     </StyledContainer>
   );

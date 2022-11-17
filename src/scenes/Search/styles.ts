@@ -97,11 +97,31 @@ export const styles = StyleSheet.create({
     elevation: 14,
     textAlign: 'center',
   },
+
+  filtersInput: {
+    zIndex: 10,
+    position: 'absolute',
+    justifyContent: 'space-between',
+    width: '100%',
+    height: 150,
+    top: 80,
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+    elevation: 14,
+    textAlign: 'center',
+  },
   filterImg: {
     height: 25,
     width: 25,
     backgroundColor: 'transparent',
     alignSelf: 'center',
+    resizeMode: 'contain',
   },
 
   evenFilter: {
@@ -112,4 +132,7 @@ export const styles = StyleSheet.create({
     borderRightStyle: 'solid',
     borderRightWidth: 0.5,
   },
+
+  input: {},
+  touchableFilter: { backgroundColor: 'transparent' },
 });

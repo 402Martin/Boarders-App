@@ -15,3 +15,26 @@ export interface IAlarm {
   message: string;
   type?: PaletteScale;
 }
+
+export type Filters = {
+  location: {
+    value: string;
+    label: string;
+  };
+  gameTitle: {
+    value: string;
+    label: string;
+  };
+  from: {
+    value: string;
+    label: string;
+  };
+  to: {
+    value: string;
+    label: string;
+  };
+};
+
+export type FilterParam = {
+  [elem in keyof Filters]: string;
+};
