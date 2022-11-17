@@ -36,3 +36,17 @@ export type GameSession = {
   requests?: RequestOut[];
   userId: number;
 };
+
+export type GameSessionIn = {
+  createdAt: Date;
+  date: Date; //
+  deletedAt: null;
+  description: string;
+  gameTitle: string;
+  id: number;
+  location: string;
+  maxQuantityPlayers: number;
+  minQuantityPlayers: number;
+  updatedAt: Date;
+  userId: number;
+};

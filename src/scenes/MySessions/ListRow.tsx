@@ -25,6 +25,10 @@ const ListRow: React.FC<Props> = (props) => {
   const handleViewRequests = () => {
     navigate(routes.PENDINGREQUEST, { id: data.id });
   };
+
+  const handleUpdateSession = () => {
+    navigate(routes.UPDATE_SESSION, { id: data.id });
+  };
   const handleSuspend = async () => {
     const res = await sessionService.delete(data.id);
 
@@ -74,6 +78,7 @@ const ListRow: React.FC<Props> = (props) => {
             <StyledTouchableAlternate
               style={styles.inputButtons}
               color={PaletteScale.SECONDARY_ACCENT_INFO_BLUE50}
+              onPress={handleUpdateSession}
             >
               Editar
             </StyledTouchableAlternate>
