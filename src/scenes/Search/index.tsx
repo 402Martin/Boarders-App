@@ -5,12 +5,12 @@ import { styles } from './styles';
 import Filters from './Filters';
 import { sessionService } from 'src/services';
 import { GameSession } from 'src/types/session.types';
-import { Filters as FiltersType } from 'src/types/main.types';
+import { FilterParam, Filters as FiltersType } from 'src/types/main.types';
 
 const Search = () => {
   const [sessions, setSessions] = useState<GameSession[]>([]);
 
-  const fetchData = async (filters?: FiltersType) => {
+  const fetchData = async (filters?: FilterParam) => {
     const res = await sessionService.getAll(filters);
     setSessions(res.data);
   };
