@@ -5,6 +5,7 @@ import { StyledContainer } from 'src/components/StyledContainer';
 import { StyledText } from 'src/components/StyledText';
 import StyledTouchableAlternate from 'src/components/StyledTouchableAlternate';
 import { routes } from 'src/navigation/routes';
+import { requestService } from 'src/services/request.service';
 import { useAppSelector } from 'src/store';
 import { PaletteScale, TypographyScale } from 'src/styles/types';
 import { RequestStatus } from 'src/types/request.model.types';
@@ -14,28 +15,33 @@ import { styles } from './styles';
 type Props = {
   data: GameSession;
   style?: object;
+  setData: () => void;
 };
 
 const ListRow: React.FC<Props> = (props) => {
   const user = useAppSelector((state) => state.user);
-  const { data, style } = props;
+  const { data, style, setData } = props;
   const [userRequest, setUserRequest] = useState(
     data.requests?.find((request) => request.userId === user.id),
   );
 
   const { navigate } = useNavigation();
 
-  const request = data.requests?.find((request) => request.userId === user.id);
-
   useEffect(() => {
+    console.log({ data, user });
     setUserRequest(data.requests?.find((request) => request.userId === user.id));
   }, [user, data]);
 
-  useEffect(() => {
-    console.log(userRequest);
-  }, [request]);
   const handleViewRequests = () => {
     navigate(routes.PENDINGREQUEST, { id: data.id });
+  };
+
+  const handleRequest = async () => {
+    const res = await requestService.create({ gameSessionId: data.id, userId: user.id });
+
+    if (!res.data) return;
+
+    setData();
   };
   return (
     <StyledContainer style={{ ...styles.row, ...(style || {}) }}>
@@ -44,7 +50,7 @@ const ListRow: React.FC<Props> = (props) => {
           {data.gameTitle}
         </StyledText>
         {user?.id !== data.userId && !userRequest && (
-          <StyledTouchableAlternate style={styles.rowHeaderButton}>
+          <StyledTouchableAlternate style={styles.rowHeaderButton} onPress={handleRequest}>
             <Text style={styles.rowHeaderButtonText}>QUIERO UNIRME</Text>
           </StyledTouchableAlternate>
         )}
@@ -54,7 +60,7 @@ const ListRow: React.FC<Props> = (props) => {
           </StyledTouchableAlternate>
         )}
 
-        {user?.id !== data.userId && userRequest && (
+        {userRequest && (
           <StyledTouchableAlternate style={styles.rowHeaderButton}>
             {parseInt(userRequest.status.toString(), 10) === RequestStatus.PENDING && (
               <Text style={styles.rowHeaderButtonText}>Pendiente</Text>

@@ -61,7 +61,6 @@ export const useForm = <T extends object>(initialState: ISchema, handleNotify?: 
     setValues(newState);
   };
   useEffect(() => {
-    console.log(fields);
     handleValidity();
   }, [fields]);
 

@@ -5,9 +5,10 @@ export default class BaseService<T extends { id: number | string }, R extends ob
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
-  public getAll = async (params: IQuery = {}) => {
-    const query = Object.keys(params) ? `?${JSON.stringify(params)}` : '';
-    const elem = (await axios.get(`${this.endpoint}${query}`)).data;
+  public getAll = async (params: IQuery | null = null) => {
+    const qs = new URLSearchParams(params || {});
+    const query = `?${qs.toString()}`;
+    const elem = (await axios.get(`${this.endpoint}${query.length > 1 ? query : ''}`)).data;
 
     return elem as IResponse<T[]>;
   };

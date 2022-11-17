@@ -22,7 +22,7 @@ const List: React.FC<Props> = (props) => {
         </StyledText>
       </StyledContainer>
       {data?.map((data: any, index: number) => (
-        <ListRow data={data} style={{ ...(index % 2 == 0 && styles.evenRow) }} />
+        <ListRow data={data} style={{ ...(index % 2 == 0 && styles.evenRow) }} key={data.id} />
       ))}
     </ScrollView>
   );

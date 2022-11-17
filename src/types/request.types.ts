@@ -10,13 +10,7 @@ export interface IPaginatedResponse<T> {
 }
 
 export interface IQuery {
-  sort_by?: string | undefined;
-  order_by?: string;
-  page?: number;
-  page_size?: number;
-  filters?: {
-    [key: string]: any;
-  };
+  [key: string]: any;
 }
 export interface IResponse<T> {
   data: T;

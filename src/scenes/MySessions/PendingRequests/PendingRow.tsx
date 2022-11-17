@@ -6,6 +6,7 @@ import { StyledText } from 'src/components/StyledText';
 import { StyledTouchable } from 'src/components/StyledTouchable';
 import StyledTouchableAlternate from 'src/components/StyledTouchableAlternate';
 import { requestService } from 'src/services/request.service';
+import { useAppSelector } from 'src/store';
 import { PaletteScale, TypographyScale } from 'src/styles/types';
 import { RequestOut, RequestStatus } from 'src/types/request.model.types';
 import { styles as baseStyles } from '../styles';
@@ -17,10 +18,11 @@ type Props = {
 };
 
 const PendingRow: React.FC<Props> = (props) => {
+  const user = useAppSelector((state) => state.user);
   const { data, style } = props;
   const [status, setStatus] = useState<RequestStatus>(data?.status || RequestStatus.PENDING);
   const handleUpdate = async (status: RequestStatus) => {
-    const res = await requestService.update({ ...data, status });
+    const res = await requestService.update({ ...data, userId: user.id, status });
     if (!res.data || !res.data.status) return;
     setStatus(res.data.status);
   };
