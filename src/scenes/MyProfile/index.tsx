@@ -99,9 +99,18 @@ const MyProfile = () => {
         >
           Mi Perfil
         </StyledText>
-
-        <Image source={{ uri: filePath?.uri }} style={{ width: 150, height: 150, borderRadius: 75 }} />
-        <Button onPress={chooseFile}>ododo</Button>
+        <StyledView>
+          <Image
+            source={{
+              uri:
+                filePath.uri ||
+                'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y',
+            }}
+            style={{ width: 150, height: 150, borderRadius: 75, marginBottom: 20 }}
+          />
+          {editing && <Button onPress={chooseFile}>Cambiar foto</Button>}
+        </StyledView>
+        <StyledText color={PaletteScale.BLACK}> Nombre de usuario</StyledText>
         <TextInput
           value={user.username}
           editable={editing}
@@ -111,8 +120,13 @@ const MyProfile = () => {
             fontSize: 20,
             fontWeight: 'bold',
             padding: 10,
+            margin: 10,
+            borderRadius: 10,
+            textAlign: 'center',
           }}
         />
+
+        <StyledText color={PaletteScale.BLACK}> Descripción</StyledText>
         <TextInput
           value={user.description}
           editable={editing}
@@ -122,6 +136,8 @@ const MyProfile = () => {
             fontSize: 16,
             textAlign: 'center',
             padding: 10,
+            borderRadius: 10,
+            width: '80%',
           }}
           multiline
         />
