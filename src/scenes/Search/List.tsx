@@ -11,10 +11,11 @@ import { styles } from './styles';
 type Props = {
   data: GameSession[];
   style?: StyleProp<ViewStyle>;
+  setData: () => {};
 };
 
 const List: React.FC<Props> = (props) => {
-  const { data } = props;
+  const { data, setData } = props;
   return (
     <ScrollView style={styles.table}>
       <StyledContainer style={styles.listTextContainer}>
@@ -23,7 +24,12 @@ const List: React.FC<Props> = (props) => {
         </StyledText>
       </StyledContainer>
       {data?.map((data: any, index: number) => (
-        <ListRow key={data.id} data={data} style={{ ...(index % 2 == 0 && styles.evenRow) }} />
+        <ListRow
+          key={data.id}
+          data={data}
+          style={{ ...(index % 2 == 0 && styles.evenRow) }}
+          setData={setData}
+        />
       ))}
     </ScrollView>
   );

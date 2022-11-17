@@ -22,11 +22,9 @@ const Search = () => {
   };
   const fetchData = async () => {
     const filters = {
-      filters: {
-        userId: user?.id,
-      },
+      userId: user?.id,
     };
-    const res = await sessionService.getAll({ filters });
+    const res = await sessionService.getAll(filters);
     setSessions(res.data);
   };
 

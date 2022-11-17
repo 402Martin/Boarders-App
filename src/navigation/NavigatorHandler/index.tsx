@@ -14,11 +14,11 @@ const NavigatorHandler = () => {
     try {
       const loggedUser = JSON.parse((await AsyncStorage.getItem('user')) || '{}');
 
-      if (loggedUser?.date < new Date().getTime()) {
-        dispatch(userActions.setUser({} as User));
+      if (loggedUser?.date > new Date().getTime()) {
+        dispatch(userActions.setUser(loggedUser as User));
         return;
       }
-      dispatch(userActions.setUser(loggedUser as User));
+      dispatch(userActions.setUser({} as User));
     } catch (e) {
       dispatch(userActions.setUser({} as User));
     }

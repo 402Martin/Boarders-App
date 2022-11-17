@@ -1,3 +1,4 @@
+import { RequestOut } from './request.model.types';
 import { User } from './user.types';
 
 export interface ISessionForm {
@@ -33,4 +34,5 @@ export type GameSession = {
   requirements?: string;
   updatedAt: Date;
   requests?: RequestOut[];
+  userId: number;
 };

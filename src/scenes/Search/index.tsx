@@ -20,7 +20,7 @@ const Search = () => {
   return (
     <SceneContainer style={styles.container}>
       <Filters />
-      <List data={sessions} />
+      <List data={sessions} setData={fetchData} />
     </SceneContainer>
   );
 };

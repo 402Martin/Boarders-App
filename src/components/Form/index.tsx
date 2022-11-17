@@ -9,6 +9,7 @@ import { SceneContainer } from '../SceneContainer';
 import { StyledView } from '../StyledView';
 import HandleButton from './HandleButton';
 import HandleInput from './HandleInput';
+import HandleInputType from './HandleInputType';
 import { styles } from './styles';
 import { ISchema } from './types';
 
@@ -35,7 +36,7 @@ const Form = <T extends object>(props: Props<T>) => {
       <StyledView style={styles.form}>
         <>
           {Object.keys(fields).map((key) => (
-            <HandleInput
+            <HandleInputType
               key={key}
               inputKey={key}
               field={fields[key]}
