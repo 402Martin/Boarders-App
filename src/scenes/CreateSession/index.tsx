@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'src/components/Form';
 import { SceneContainer } from 'src/components/SceneContainer';
 import { RootStackParamList, routes } from 'src/navigation/routes';
@@ -20,7 +20,7 @@ const CreateSessionScene = (props: Props) => {
   const { updateGameSession } = props;
   const [message, setMessage] = useState<IMessage | undefined>();
   const { navigate } = useNavigation();
-  const initialSchema = updateGameSession ? updateSchema(updateGameSession) : schema;
+  const [initialSchema, setInitialSchema] = useState(schema);
   const create = async (objValues: ISessionForm) => {
     const session = await sessionService.createSession(objValues);
     if (session) {
@@ -41,9 +41,18 @@ const CreateSessionScene = (props: Props) => {
     } else setMessage(wrongMessage);
   };
 
+  useEffect(() => {
+    if (updateGameSession) {
+      setInitialSchema(updateSchema(updateGameSession));
+    }
+  }, [updateGameSession]);
+
+  useEffect(() => {
+    console.log(initialSchema);
+  }, [initialSchema]);
+
   const submit = (objValues: ISessionForm) => {
     if (updateGameSession) return update(objValues);
-
     return create(objValues);
   };
 

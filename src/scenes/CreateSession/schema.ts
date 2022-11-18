@@ -64,12 +64,14 @@ export const updateSchema = (gameSession: GameSession) => {
   const newSchema = { ...schema } as any;
   (Object.keys(newSchema) as (keyof GameSession)[]).forEach((key) => {
     if (key === 'date') {
-      newSchema[key].value = moment(gameSession[key]).format('DD/MM/YYYY HH:mm');
+      newSchema[key].value = moment(gameSession[key]).format('DD/MM/YY HH:mm');
     } else {
       newSchema[key].value = gameSession[key];
     }
+    newSchema[key].isValid = true;
+    newSchema[key].hasFocus = true;
   });
-  return newSchema as ISchema;
+  return { newSchema } as ISchema;
 };
 export const succesMessage = {
   type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
