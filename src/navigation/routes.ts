@@ -2,6 +2,7 @@ export enum routes {
   REGISTER = 'register',
   LOGIN = 'login',
   CREATE_SESSION = 'create_session',
+  UPDATE_SESSION = 'update_session',
   MYSESSION = 'mySession',
   PENDINGREQUEST = 'pendingrequest',
   MYPROFILE = 'myprofile',
@@ -16,4 +17,5 @@ export type RootStackParamList = {
   myprofile: undefined;
   search: undefined;
   pendingrequest: { id: number };
+  update_session: { id: number };
 };

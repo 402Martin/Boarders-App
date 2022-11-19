@@ -28,6 +28,7 @@ const HandleInput: React.FC<Props> = (props) => {
         validValue={field.isValid}
         onBlur={() => handleOnFocus(key)}
         disabled={field.isDisabled}
+        value={field.value.toString()}
       ></StyledTextInput>
       {!field.isValid && (
         <StyledText style={styles.formChildError}>{field.isNotValidmessage || 'valor invalid'}</StyledText>

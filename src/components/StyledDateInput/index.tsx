@@ -67,6 +67,19 @@ const StyledDateInput: React.FC<Props> = (props) => {
     handleFoucs();
   }, [dateFocus, timeFocus]);
 
+  useEffect(() => {
+    console.log('date', field);
+    if (!field.value) return;
+    const dateVal = moment(field.value, 'DD/MM/YY HH:mm');
+    console.log('date1', dateVal);
+
+    if (!dateVal.isValid()) return;
+
+    console.log('date2', dateVal);
+    setDate(dateVal.format('DD/MM/YY'));
+    setTime(dateVal.format('HH:mm'));
+  }, [field, field.value]);
+
   return (
     <View style={{ ...styles.view }}>
       <View style={styles.date}>
