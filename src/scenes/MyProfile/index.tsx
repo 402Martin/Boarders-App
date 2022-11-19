@@ -103,7 +103,7 @@ const MyProfile = () => {
           <Image
             source={{
               uri:
-                filePath.uri ||
+                filePath?.uri ||
                 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y',
             }}
             style={{ width: 150, height: 150, borderRadius: 75, marginBottom: 20 }}
