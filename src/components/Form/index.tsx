@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { NativeSyntheticEvent, Text, TextInputChangeEventData } from 'react-native';
 import { useForm } from 'src/hooks/useForm';
+import { useAppDispatch } from 'src/store';
+import { alarmActions } from 'src/store/alarm.slice';
 import { PaletteScale } from 'src/styles/types';
 import Message from '../Message';
 import { SceneContainer } from '../SceneContainer';
 import { StyledView } from '../StyledView';
 import HandleButton from './HandleButton';
 import HandleInput from './HandleInput';
+import HandleInputType from './HandleInputType';
 import { styles } from './styles';
 import { ISchema } from './types';
 
@@ -18,18 +21,22 @@ type Props<T extends object> = {
 };
 const Form = <T extends object>(props: Props<T>) => {
   const { schema, notify, buttons, message } = props;
-
+  const dispatch = useAppDispatch();
   const [fields, isValid, handleFieldsChange, getValues, handleOnFocus, handleIsInvalid] = useForm<T>(
     schema,
     notify,
   );
 
+  useEffect(() => {
+    if (!message?.message?.length) return;
+    dispatch(alarmActions.setAlarm(message));
+  }, [message]);
   return (
     <SceneContainer style={styles.container}>
       <StyledView style={styles.form}>
         <>
           {Object.keys(fields).map((key) => (
-            <HandleInput
+            <HandleInputType
               key={key}
               inputKey={key}
               field={fields[key]}
@@ -41,14 +48,6 @@ const Form = <T extends object>(props: Props<T>) => {
         {buttons?.map((button) => (
           <HandleButton button={button} getValues={getValues} isValid={isValid} key={button.text} />
         ))}
-        {message?.message?.length ? (
-          <Message
-            message={message?.message || ''}
-            color={message?.type || PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50}
-          ></Message>
-        ) : (
-          <></>
-        )}
       </StyledView>
     </SceneContainer>
   );

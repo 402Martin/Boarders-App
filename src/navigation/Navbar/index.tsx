@@ -10,6 +10,8 @@ import iconLogo from 'src/assets/icons/iconLogo.png';
 
 import { Image } from 'react-native';
 import PendingRequests from 'src/scenes/MySessions/PendingRequests';
+import CreateSessionScene from 'src/scenes/CreateSession';
+import UpdateSession from 'src/scenes/UpdateSession';
 
 const Tab = createBottomTabNavigator();
 
@@ -60,7 +62,7 @@ const Navbar = () => {
       />
       <Tab.Screen
         name={routes.MYSESSION}
-        component={PendingRequests}
+        component={MySessions}
         options={{
           tabBarIcon: ({ focused, color, size }) => {
             return (
@@ -76,6 +78,21 @@ const Navbar = () => {
           },
           tabBarLabel: 'Mis sessiones',
         }}
+      />
+      <Tab.Screen
+        name={routes.CREATE_SESSION}
+        component={CreateSessionScene}
+        options={({ route }) => ({
+          tabBarButton: () => null,
+        })}
+      />
+
+      <Tab.Screen
+        name={routes.UPDATE_SESSION}
+        component={UpdateSession}
+        options={({ route }) => ({
+          tabBarButton: () => null,
+        })}
       />
 
       <Tab.Screen

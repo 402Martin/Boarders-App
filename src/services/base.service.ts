@@ -5,22 +5,23 @@ export default class BaseService<T extends { id: number | string }, R extends ob
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
-  public getAll = async (params: IQuery = {}) => {
-    const elem = await axios.get(`${this.endpoint}?${JSON.stringify(params)}`);
-    return elem.data as IResponse<T[]>;
+  public getAll = async (params: IQuery | null = null) => {
+    const qs = new URLSearchParams(params || {});
+    const query = `?${qs.toString()}`;
+    const elem = (await axios.get(`${this.endpoint}${query.length > 1 ? query : ''}`)).data;
+
+    return elem as IResponse<T[]>;
   };
-  public get = async (id: string | number = '') => {
-    return await axios.get(`${this.endpoint}/${id}`);
+  public get = async (id: string | number = ''): Promise<IResponse<T>> => {
+    return (await axios.get(`${this.endpoint}/${id}`)).data;
   };
   public create = async (element: R) => {
-    console.log('asd');
-    console.log(this.endpoint);
     const res = await axios.post(this.endpoint, element);
     return res.data as IResponse<T>;
   };
 
-  public update = async (element: Partial<T>) => {
-    return await axios.put(`${this.endpoint}/${element.id}`, element);
+  public update = async (element: Partial<T>): Promise<IResponse<T>> => {
+    return (await axios.put(`${this.endpoint}/${element.id}`, element)).data;
   };
   public updateMultiple = async (element: Partial<T>[]) => {
     return await axios.put(this.endpoint, element);

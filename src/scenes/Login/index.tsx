@@ -11,6 +11,7 @@ import { strings } from './strings';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector, userActions } from 'src/store';
 import { alarmActions } from 'src/store/alarm.slice';
+import OneSignal from 'react-native-onesignal';
 
 type Props = NativeStackScreenProps<RootStackParamList, routes.LOGIN, 'MyStack'>;
 
@@ -21,8 +22,11 @@ const Login = ({ navigation }: Props) => {
     const data = await userService.login(objValues);
     if (data) {
       dispatch(alarmActions.setAlarm(succesMessage));
-      console.log(data);
-      dispatch(userActions.setUser(data.data));
+
+      const date = new Date();
+      date.setHours(date.getHours() + 1);
+      OneSignal.setExternalUserId(data.data.id.toString());
+      dispatch(userActions.setUser({ ...data.data, date: date.getTime() }));
     }
   };
 

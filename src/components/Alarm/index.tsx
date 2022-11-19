@@ -12,7 +12,6 @@ const Alarm = () => {
   const [isAlarmActive, setIsAlarmActive] = useState<boolean>(false);
   useEffect(() => {
     if (!alarm.message) return;
-    console.log(alarm.message);
     setIsAlarmActive(true);
     setTimeout(() => {
       setIsAlarmActive(false);
@@ -20,10 +19,6 @@ const Alarm = () => {
     }, 5000);
   }, [alarm]);
 
-  useEffect(() => {
-    console.log(alarm.message);
-    console.log(isAlarmActive);
-  }, [isAlarmActive]);
   return (
     <>
       {isAlarmActive && (

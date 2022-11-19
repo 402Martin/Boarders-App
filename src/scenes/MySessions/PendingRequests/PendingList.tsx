@@ -3,13 +3,15 @@ import { ScrollView } from 'react-native';
 import { StyledContainer } from 'src/components/StyledContainer';
 import { StyledText } from 'src/components/StyledText';
 import { PaletteScale } from 'src/styles/types';
+import { RequestOut } from 'src/types/request.model.types';
+import { GameSession } from 'src/types/session.types';
 import ListRow from '../ListRow';
 import { styles as baseStyles } from '../styles';
 import PendingRow from './PendingRow';
 import { styles } from './styles';
 
 type Props = {
-  data: any[];
+  data: GameSession;
 };
 const PendingList = (props: Props) => {
   const { data } = props;
@@ -42,10 +44,13 @@ const PendingList = (props: Props) => {
           </StyledText>
         </StyledContainer>
       </StyledContainer>
-      {data?.map((item, index) => (
+      {data?.requests?.map((item, index) => (
         <PendingRow
           data={item}
-          style={{ ...((index % 2 == 0 || index === data.length - 1) && baseStyles.evenRow) }}
+          key={item.id}
+          style={{
+            ...((index % 2 == 0 || index === (data?.requests || []).length - 1) && baseStyles.evenRow),
+          }}
         />
       ))}
     </ScrollView>

@@ -4,6 +4,7 @@ export type User = {
   email: string;
   profilePicId: string;
   id: number;
+  date?: Date;
 };
 
 export interface ILogin {

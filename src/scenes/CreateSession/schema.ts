@@ -1,5 +1,7 @@
+import moment from 'moment';
 import { ISchema } from 'src/components/Form/types';
 import { PaletteScale } from 'src/styles/types';
+import { GameSession } from 'src/types/session.types';
 
 export const schema: ISchema = {
   gameTitle: {
@@ -16,9 +18,9 @@ export const schema: ISchema = {
     isValid: true,
     hasFocus: false,
     isNotValidmessage: 'La fecha es requerida',
-    validation: (value: string) => !!value.trim().length,
+    validation: (value: string) => moment(value, 'DD/MM/YYYY HH:mm').isAfter(moment(), 'day'),
     label: 'Fecha y hora',
-    type: 'text',
+    type: 'date',
   },
   location: {
     value: '',
@@ -58,6 +60,19 @@ export const schema: ISchema = {
   },
 };
 
+export const updateSchema = (gameSession: GameSession) => {
+  const newSchema = { ...schema } as any;
+  (Object.keys(newSchema) as (keyof GameSession)[]).forEach((key) => {
+    if (key === 'date') {
+      newSchema[key].value = moment(gameSession[key]).format('DD/MM/YY HH:mm');
+    } else {
+      newSchema[key].value = gameSession[key];
+    }
+    newSchema[key].isValid = true;
+    newSchema[key].hasFocus = true;
+  });
+  return { newSchema } as ISchema;
+};
 export const succesMessage = {
   type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
   message: 'Sesion creada con éxito',
