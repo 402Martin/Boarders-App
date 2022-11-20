@@ -1,6 +1,8 @@
+import { IResponse } from 'src/types/request.types';
 import axios from 'axios';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import { endpoints } from './endpoints';
+import { ProfilePic } from 'src/types/user.types';
 
 class FileService {
   private endpoint: string;
@@ -23,7 +25,7 @@ class FileService {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return res.data.message as string;
+    return res.data as IResponse<ProfilePic>;
   };
 }
 

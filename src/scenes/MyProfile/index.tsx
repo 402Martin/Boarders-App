@@ -92,6 +92,7 @@ const MyProfile = () => {
         console.log('ImagePicker Error: ', response.error);
       } else {
         const res = await fileService.upload(response);
+        console.log(res);
         if (!res?.data) return;
         setUserUpdated((u) => ({ ...u, profilePicId: res.data.id }));
         setFilePath(response);
@@ -111,6 +112,7 @@ const MyProfile = () => {
   }, [filePath, filePath?.uri]);
 
   useEffect(() => {
+    console.log(userUpdated);
     getUser();
   }, []);
 
@@ -138,7 +140,7 @@ const MyProfile = () => {
             source={{
               uri:
                 filePath?.uri ||
-                userUpdated?.profilePic?.url ||
+                userUpdated?.profilePic?.path ||
                 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y',
             }}
             style={{ width: 150, height: 150, borderRadius: 75, marginBottom: 20 }}

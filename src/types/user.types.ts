@@ -11,7 +11,7 @@ export type User = {
 
 export type ProfilePic = {
   id: string;
-  url?: string;
+  path?: string;
 };
 export interface ILogin {
   username: string;
