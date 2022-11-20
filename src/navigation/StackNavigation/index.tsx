@@ -9,14 +9,13 @@ const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName={routes.MYPROFILE}
+      initialRouteName={routes.LOGIN}
       screenOptions={{
         headerShown: false,
       }}
     >
       <Stack.Screen name={routes.REGISTER} component={Register} />
       <Stack.Screen name={routes.LOGIN} component={Login} />
-      <Stack.Screen name={routes.MYPROFILE} component={MyProfile} />
     </Stack.Navigator>
   );
 };

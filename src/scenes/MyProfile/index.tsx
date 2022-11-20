@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextInput } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 import { SceneContainer } from 'src/components/SceneContainer';
@@ -6,32 +6,48 @@ import { StyledText } from 'src/components/StyledText';
 import { StyledView } from 'src/components/StyledView';
 import { strings } from './strings';
 import { Image } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
 import { PaletteScale, TypographyScale } from 'src/styles/types';
+import { userService } from 'src/services';
+import { User } from 'src/types/user.types';
+import { useDispatch } from 'react-redux';
+import { useAppSelector, userActions } from 'src/store';
+import { alarmActions } from 'src/store/alarm.slice';
+import { fileService } from 'src/services/file.service';
 
 const MyProfile = () => {
   const [editing, setEditing] = useState(false);
-  const [user, setUser] = useState({
-    username: 'grazo',
-    description: "I'm a software engineer. Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum",
-  });
+  const [userUpdated, setUserUpdated] = useState<Partial<User> | null>(null);
+  const dispatch = useDispatch();
+  const id = useAppSelector((state) => state.user.id);
 
   const toggleEdit = () => {
-    setEditing(!editing);
     if (editing) {
       sendUpdates();
     }
+    setEditing(!editing);
   };
-  const [filePath, setFilePath] = useState<any>();
+  const [filePath, setFilePath] = useState<ImagePickerResponse>();
 
-  const sendUpdates = () => {
-    console.log(filePath);
+  const sendUpdates = async () => {
+    if (!userUpdated) return;
+    const res = await userService.update({ ...userUpdated, id });
+    if (!res.data) return;
+
+    dispatch(alarmActions.clearAlarm());
+    dispatch(
+      alarmActions.setAlarm({
+        message: 'Perfil actualizado',
+        type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
+      }),
+    );
+    dispatch(userActions.setUser({ ...res.data }));
   };
 
   const handleChange = (key: 'username' | 'description') => (text: any) => {
-    var newUser = { ...user };
+    var newUser = { ...userUpdated };
     newUser[key] = text;
-    setUser(newUser);
+    setUserUpdated(newUser);
   };
 
   interface Action {
@@ -69,16 +85,34 @@ const MyProfile = () => {
         path: 'images',
       },
     };
-    ImagePicker.showImagePicker(options, (response: any) => {
+    ImagePicker.showImagePicker(options, async (response) => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
+        const res = await fileService.upload(response);
+        if (!res?.data) return;
+        setUserUpdated((u) => ({ ...u, profilePicId: res.data.id }));
         setFilePath(response);
       }
     });
   };
+
+  const getUser = async () => {
+    const res = await userService.get(id);
+    if (!res.data) return;
+    setUserUpdated(res.data);
+  };
+
+  useEffect(() => {
+    if (!filePath?.uri) return;
+    const source = { uri: filePath.uri };
+  }, [filePath, filePath?.uri]);
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <SceneContainer>
@@ -103,7 +137,8 @@ const MyProfile = () => {
           <Image
             source={{
               uri:
-                filePath.uri ||
+                filePath?.uri ||
+                userUpdated?.profilePic?.url ||
                 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y',
             }}
             style={{ width: 150, height: 150, borderRadius: 75, marginBottom: 20 }}
@@ -112,9 +147,9 @@ const MyProfile = () => {
         </StyledView>
         <StyledText color={PaletteScale.BLACK}> Nombre de usuario</StyledText>
         <TextInput
-          value={user.username}
+          value={userUpdated?.username}
           editable={editing}
-          onChange={handleChange('username')}
+          onChangeText={handleChange('username')}
           style={{
             backgroundColor: editing ? 'lightgrey' : 'transparent',
             fontSize: 20,
@@ -128,9 +163,9 @@ const MyProfile = () => {
 
         <StyledText color={PaletteScale.BLACK}> Descripción</StyledText>
         <TextInput
-          value={user.description}
+          value={userUpdated?.description}
           editable={editing}
-          onChange={handleChange('description')}
+          onChangeText={handleChange('description')}
           style={{
             backgroundColor: editing ? 'lightgrey' : 'transparent',
             fontSize: 16,
