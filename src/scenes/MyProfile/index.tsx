@@ -93,7 +93,6 @@ const MyProfile = () => {
         console.log('ImagePicker Error: ', response.error);
       } else {
         const res = await fileService.upload(response);
-        console.log(res);
         if (!res?.data) return;
         setUserUpdated((u) => ({ ...u, profilePicId: res.data.id }));
         setFilePath(response);
@@ -139,10 +138,7 @@ const MyProfile = () => {
         <StyledView>
           <Image
             source={{
-              uri:
-                filePath?.uri ||
-                userUpdated?.profilePic?.path ||
-                deafultImg,
+              uri: filePath?.uri || userUpdated?.profilePic?.path || deafultImg,
             }}
             style={{ width: 150, height: 150, borderRadius: 75, marginBottom: 20 }}
           />

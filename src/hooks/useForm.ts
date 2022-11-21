@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { ISchema } from 'src/components/Form/types';
 export const useForm = <T extends object>(initialState: ISchema, handleNotify?: (state: ISchema) => void) => {
@@ -6,8 +7,13 @@ export const useForm = <T extends object>(initialState: ISchema, handleNotify?: 
   const [isValid, setIsValid] = useState(false);
 
   const handleFieldsChange = (value: string, key: string) => {
+    console.log('handleFieldsChange', value, key);
+    console.log(moment(value, 'DD/MM/YY HH:mm'));
+    console.log(moment());
+    console.log(moment(value, 'DD/MM/YY HH:mm').isAfter(moment(), 'day'));
     if (!key) return;
     const oldElem = { ...fields[key] };
+
     const newElem = {
       ...oldElem,
       value: oldElem.transformToNumber ? Number(value) : value,

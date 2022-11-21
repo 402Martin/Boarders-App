@@ -1,9 +1,10 @@
+import moment from 'moment';
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { StyledContainer } from 'src/components/StyledContainer';
 import { StyledText } from 'src/components/StyledText';
 import { PaletteScale } from 'src/styles/types';
-import { RequestOut } from 'src/types/request.model.types';
+import { RequestOut, RequestStatus } from 'src/types/request.model.types';
 import { GameSession } from 'src/types/session.types';
 import ListRow from '../ListRow';
 import { styles as baseStyles } from '../styles';
@@ -20,13 +21,13 @@ const PendingList = (props: Props) => {
       <StyledContainer style={styles.titleContainer}>
         <StyledContainer style={styles.title}>
           <StyledText color={PaletteScale.BLACK} style={{ ...styles.child, ...styles.titleText }}>
-            Monoply
+            {data.gameTitle}
           </StyledText>
           <StyledText style={styles.child} color={PaletteScale.THIRD_SURFACE_GREYSCALE50}>
-            12/10/22 14:00
+            {moment(data.date).format('DD/MM/YYYY HH:mm')}
           </StyledText>
           <StyledText style={styles.child} color={PaletteScale.THIRD_SURFACE_GREYSCALE50}>
-            Leyenda Patria
+            {data.location}
           </StyledText>
         </StyledContainer>
         <StyledContainer style={styles.title}>
@@ -40,7 +41,8 @@ const PendingList = (props: Props) => {
             style={{ ...styles.child, ...styles.alginRight }}
             color={PaletteScale.THIRD_SURFACE_GREYSCALE50}
           >
-            1/6
+            {data.requests?.filter((r) => r.status === RequestStatus.ACCEPTED).length}/
+            {data.maxQuantityPlayers}
           </StyledText>
         </StyledContainer>
       </StyledContainer>

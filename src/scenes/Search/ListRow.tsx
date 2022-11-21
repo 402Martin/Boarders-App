@@ -30,7 +30,6 @@ const ListRow: React.FC<Props> = (props) => {
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    console.log({ data, user });
     setUserRequest(data.requests?.find((request) => request.userId === user.id));
   }, [user, data]);
 

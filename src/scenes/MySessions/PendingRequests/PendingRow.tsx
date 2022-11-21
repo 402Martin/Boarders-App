@@ -24,7 +24,12 @@ const PendingRow: React.FC<Props> = (props) => {
   const { data, style } = props;
   const [status, setStatus] = useState<RequestStatus>(data?.status || RequestStatus.PENDING);
   const handleUpdate = async (status: RequestStatus) => {
-    const res = await requestService.update({ ...data, userId: user.id, status });
+    const res = await requestService.update({
+      id: data.id,
+      userId: user.id,
+      status,
+      gameSessionId: data.gameSessionId,
+    });
     if (!res.data || !res.data.status) return;
     setStatus(res.data.status);
   };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SceneContainer } from 'src/components/SceneContainer';
 import { sessionService } from 'src/services';
 import { requestService } from 'src/services/request.service';
-import { GameSession } from 'src/types/gameSession.types';
+import { GameSession } from 'src/types/session.types';
 import { styles } from '../styles';
 import PendingList from './PendingList';
 

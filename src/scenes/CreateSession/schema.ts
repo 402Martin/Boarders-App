@@ -18,7 +18,7 @@ export const schema: ISchema = {
     isValid: true,
     hasFocus: false,
     isNotValidmessage: 'La fecha es requerida',
-    validation: (value: string) => moment(value, 'DD/MM/YYYY HH:mm').isAfter(moment(), 'day'),
+    validation: (value: string) => moment(value, 'DD/MM/YY HH:mm').isAfter(moment(), 'day'),
     label: 'Fecha y hora',
     type: 'date',
   },
