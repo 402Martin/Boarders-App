@@ -7,23 +7,16 @@ export const useForm = <T extends object>(initialState: ISchema, handleNotify?: 
   const [isValid, setIsValid] = useState(false);
 
   const handleFieldsChange = (value: string, key: string) => {
-    console.log('handleFieldsChange', value, key);
-    console.log(moment(value, 'DD/MM/YY HH:mm'));
-    console.log(moment());
-    console.log(moment(value, 'DD/MM/YY HH:mm').isAfter(moment(), 'day'));
     if (!key) return;
     const oldElem = { ...fields[key] };
-
     const newElem = {
-      ...oldElem,
       value: oldElem.transformToNumber ? Number(value) : value,
-      isValid: oldElem.validation(value) || !oldElem.hasFocus,
     };
-    if (newElem.notify && handleNotify) handleNotify({ ...fields, [key]: { ...newElem } });
-    setValues({
-      ...fields,
-      [key]: { ...newElem },
-    });
+    if (oldElem.notify && handleNotify) handleNotify({ ...fields, [key]: { ...oldElem, ...newElem } });
+    setValues((f) => ({
+      ...f,
+      [key]: { ...f[key], ...newElem, isValid: f[key].validation(value) || !f[key].hasFocus },
+    }));
   };
 
   const handleOnFocus = (key: string) => {
@@ -31,14 +24,16 @@ export const useForm = <T extends object>(initialState: ISchema, handleNotify?: 
 
     const oldElem = { ...fields[key] };
     const newElem = {
-      ...oldElem,
       hasFocus: true,
-      isValid: oldElem.validation(oldElem.value),
     };
-    setValues({
-      ...fields,
-      [key]: { ...newElem },
-    });
+    setValues((f) => ({
+      ...f,
+      [key]: {
+        ...f[key],
+        ...newElem,
+        isValid: f[key].validation(f[key].value),
+      },
+    }));
   };
   const handleValidity = () => {
     let isValidProps = true;

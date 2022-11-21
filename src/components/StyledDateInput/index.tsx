@@ -7,6 +7,7 @@ import { styles } from './styles';
 import moment from 'moment';
 import { ISchemaAttribute } from '../Form/types';
 import { StyledText } from '../StyledText';
+import { useIsFocused } from '@react-navigation/native';
 
 type Props = {
   field: ISchemaAttribute;
@@ -26,7 +27,7 @@ const StyledDateInput: React.FC<Props> = (props) => {
   const handleOnDateChange = (dateIn: string) => {
     if (dateIn.length === 0) setDate('');
     const unMaskedDate = dateIn.replace(/\D/g, '');
-    if (unMaskedDate !== '0' && !Number(unMaskedDate)) return;
+    if (!Number(unMaskedDate)) return;
     const split = unMaskedDate.match(/.{1,2}/g) ?? [];
     if (split.length > 3) return;
 
@@ -37,7 +38,7 @@ const StyledDateInput: React.FC<Props> = (props) => {
   const handleTimeChange = (timeIn: string) => {
     if (timeIn.length === 0) setTime('');
     const unMaskedTime = timeIn.replace(/\D/g, '');
-    if (unMaskedTime !== '0' && !Number(unMaskedTime)) return;
+    if (!Number(unMaskedTime)) return;
     const split = unMaskedTime.match(/.{1,2}/g) ?? [];
 
     if (split.length > 2) return;

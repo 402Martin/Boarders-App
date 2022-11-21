@@ -106,6 +106,10 @@ const MyProfile = () => {
     setUserUpdated(res.data);
   };
 
+  const handleLogOut = () => {
+    dispatch(userActions.clearUser());
+  };
+
   useEffect(() => {
     if (!filePath?.uri) return;
     const source = { uri: filePath.uri };
@@ -176,6 +180,7 @@ const MyProfile = () => {
           multiline
         />
         <Button onPress={toggleEdit}>{editing ? strings.saveLabel : strings.editLabel}</Button>
+        <Button onPress={handleLogOut}>Cerrar session</Button>
       </StyledView>
     </SceneContainer>
   );
