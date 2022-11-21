@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from 'src/scenes/Login';
+import MyProfile from 'src/scenes/MyProfile';
 import Register from 'src/scenes/register';
 import { routes } from '../routes';
 

@@ -11,7 +11,7 @@ import { StyledText } from 'src/components/StyledText';
 import { StyledView } from 'src/components/StyledView';
 import { PaletteScale, TypographyScale } from 'src/styles/types';
 import { ISessionForm } from 'src/types/session.types';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { GameSession } from 'src/types/session.types';
 type Props = {
   updateGameSession?: GameSession;
@@ -47,8 +47,11 @@ const CreateSessionScene = (props: Props) => {
     }
   }, [updateGameSession]);
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
-    console.log(initialSchema);
+    if (!isFocused) return;
+    setInitialSchema(schema);
   }, [initialSchema]);
 
   const submit = (objValues: ISessionForm) => {
@@ -75,7 +78,14 @@ const CreateSessionScene = (props: Props) => {
         >
           {strings.title}
         </StyledText>
-        <Form<ISessionForm> schema={schema} buttons={buttons} message={message}></Form>
+        {isFocused && (
+          <Form<ISessionForm>
+            schema={initialSchema}
+            buttons={buttons}
+            message={message}
+            clear={isFocused}
+          ></Form>
+        )}
       </StyledView>
     </SceneContainer>
   );

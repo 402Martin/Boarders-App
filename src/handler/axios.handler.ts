@@ -23,7 +23,6 @@ axios.interceptors.response.use(
   },
   function (error) {
     try {
-      console.log(error.response);
       const message = error.response.data?.error;
       if (!message) throw new error();
       store.dispatch(
@@ -33,7 +32,6 @@ axios.interceptors.response.use(
         }),
       );
     } catch (error) {
-      console.log(error);
       store.dispatch(
         alarmActions.setAlarm({
           message: 'error desconocido',

@@ -18,6 +18,7 @@ const userSlice = createSlice({
     },
     clearUser: (state) => {
       state = {} as User;
+      AsyncStorage.setItem('user', JSON.stringify({}));
       return state;
     },
   },

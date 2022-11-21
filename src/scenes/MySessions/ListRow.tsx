@@ -32,7 +32,6 @@ const ListRow: React.FC<Props> = (props) => {
   const handleSuspend = async () => {
     const res = await sessionService.delete(data.id);
 
-    console.log(res);
     if (!res.data) return;
 
     setMessage({

@@ -18,19 +18,19 @@ type Props<T extends object> = {
   notify?: (state: ISchema) => void;
   buttons?: { text: string; type: string; onClick: (...arg: any) => any; isSubmit?: boolean }[];
   message?: { type: PaletteScale; message: string };
+  clear?: boolean;
 };
 const Form = <T extends object>(props: Props<T>) => {
-  const { schema, notify, buttons, message } = props;
+  const { schema, notify, buttons, message, clear } = props;
   const dispatch = useAppDispatch();
-  const [fields, isValid, handleFieldsChange, getValues, handleOnFocus, handleIsInvalid] = useForm<T>(
-    schema,
-    notify,
-  );
+  const [fields, isValid, handleFieldsChange, getValues, handleOnFocus, handleIsInvalid, handleClear] =
+    useForm<T>(schema, notify);
 
   useEffect(() => {
     if (!message?.message?.length) return;
     dispatch(alarmActions.setAlarm(message));
   }, [message]);
+
   return (
     <SceneContainer style={styles.container}>
       <StyledView style={styles.form}>
