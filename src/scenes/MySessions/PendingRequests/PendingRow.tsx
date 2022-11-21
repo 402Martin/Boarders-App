@@ -1,6 +1,8 @@
 import { request } from 'https';
 import React, { useState } from 'react';
 import { Text, TouchableHighlight } from 'react-native';
+import { deafultImg } from 'src/common/constants';
+import { Image } from 'react-native';
 import { StyledContainer } from 'src/components/StyledContainer';
 import { StyledText } from 'src/components/StyledText';
 import { StyledTouchable } from 'src/components/StyledTouchable';
@@ -29,12 +31,17 @@ const PendingRow: React.FC<Props> = (props) => {
   return (
     <StyledContainer style={{ ...(props.style || {}) }}>
       <StyledContainer style={{ ...baseStyles.row, ...styles.row }}>
-        <StyledContainer style={{ ...styles.imgContainer, ...(style || {}) }} />
+        <Image
+          source={{
+            uri: data.user?.profilePic?.path || deafultImg,
+          }}
+          style={{ width: 150, height: 150, borderRadius: 75, marginBottom: 20 }}
+        />
         <StyledContainer style={styles.requestInfo}>
           <StyledText color={PaletteScale.BLACK} typography={TypographyScale.HEADING_BOLD2}>
             {data.user.username}
           </StyledText>
-          <Text style={styles.info}>{data.user.email} </Text>
+          <Text style={styles.info}>{data.user?.description} </Text>
         </StyledContainer>
       </StyledContainer>
       <StyledContainer style={styles.buttonContainer}>

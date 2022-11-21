@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector, userActions } from 'src/store';
 import { alarmActions } from 'src/store/alarm.slice';
 import { fileService } from 'src/services/file.service';
+import { deafultImg } from 'src/common/constants';
 
 const MyProfile = () => {
   const [editing, setEditing] = useState(false);
@@ -141,7 +142,7 @@ const MyProfile = () => {
               uri:
                 filePath?.uri ||
                 userUpdated?.profilePic?.path ||
-                'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y',
+                deafultImg,
             }}
             style={{ width: 150, height: 150, borderRadius: 75, marginBottom: 20 }}
           />
