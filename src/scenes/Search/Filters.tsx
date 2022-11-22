@@ -40,13 +40,13 @@ const filters = (props: Props) => {
           style={styles.touchableFilter}
           onPress={() => setActive((act) => (act === 'location' ? null : 'location'))}
         >
-          <Image style={styles.filterImg} source={searchIcon} />
+          <Image style={styles.filterImg} source={locationIcon} />
         </StyledTouchable>
         <StyledTouchable
           style={styles.touchableFilter}
           onPress={() => setActive((act) => (act === 'gameTitle' ? null : 'gameTitle'))}
         >
-          <Image style={styles.filterImg} source={locationIcon} />
+          <Image style={styles.filterImg} source={searchIcon} />
         </StyledTouchable>
         <StyledTouchable
           style={styles.touchableFilter}
