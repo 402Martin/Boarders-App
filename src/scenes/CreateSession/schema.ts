@@ -63,6 +63,7 @@ export const schema: ISchema = {
 export const updateSchema = (gameSession: GameSession) => {
   const newSchema = { ...schema } as any;
   (Object.keys(newSchema) as (keyof GameSession)[]).forEach((key) => {
+    newSchema[key] = { ...schema[key] };
     if (key === 'date') {
       newSchema[key].value = moment(gameSession[key]).format('DD/MM/YY HH:mm');
     } else {
@@ -71,14 +72,22 @@ export const updateSchema = (gameSession: GameSession) => {
     newSchema[key].isValid = true;
     newSchema[key].hasFocus = true;
   });
-  return { newSchema } as ISchema;
+  return newSchema as ISchema;
 };
 export const succesMessage = {
   type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
   message: 'Sesion creada con éxito',
 };
+export const updateSuccesMessage = {
+  type: PaletteScale.SECONDARY_ACCENT_SUCCESS_GREEN50,
+  message: 'Sesion actualizada con éxito',
+};
 
 export const wrongMessage = {
   type: PaletteScale.SECONDARY_ACCENT_ERROR_RED50,
   message: 'Ocurrio un problema al crear la sesión',
+};
+export const updateWrongMessage = {
+  type: PaletteScale.SECONDARY_ACCENT_ERROR_RED50,
+  message: 'Ocurrio un problema al actualizar la sesión',
 };

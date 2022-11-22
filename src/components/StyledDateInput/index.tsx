@@ -16,13 +16,14 @@ type Props = {
   handleOnFocus: (key: string) => void;
 };
 const StyledDateInput: React.FC<Props> = (props) => {
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const { field, handleFieldsChange, handleOnFocus } = props;
+  const [date, setDate] = useState(field.value.toString().split(' ')[0] || '');
+  const [time, setTime] = useState(field.value.toString().split(' ')[1] || '');
   const [dateFocus, setDateFocus] = useState(false);
   const [timeFocus, setTimeFocus] = useState(false);
   const key = props.inputKey;
 
-  const { field, handleFieldsChange, handleOnFocus } = props;
+  console.log(field.value.toString().split(' '));
 
   const handleOnDateChange = (dateIn: string) => {
     if (dateIn.length === 0) setDate('');
@@ -32,17 +33,20 @@ const StyledDateInput: React.FC<Props> = (props) => {
     if (split.length > 3) return;
 
     const maskedDate = split.join('/');
+
     setDate(maskedDate);
   };
 
   const handleTimeChange = (timeIn: string) => {
     if (timeIn.length === 0) setTime('');
     const unMaskedTime = timeIn.replace(/\D/g, '');
-    if (!Number(unMaskedTime)) return;
+    const re = new RegExp('0', 'g');
+
+    const count = unMaskedTime.match(re)?.length;
+    if (!(unMaskedTime.length === count) && !Number(unMaskedTime)) return;
     const split = unMaskedTime.match(/.{1,2}/g) ?? [];
 
     if (split.length > 2) return;
-
     const maskedTime = split.join(':');
 
     setTime(maskedTime);
@@ -55,8 +59,7 @@ const StyledDateInput: React.FC<Props> = (props) => {
   };
 
   const validateTime = () => {
-    const joinedDate = moment(`${date} ${time}`, 'DD/MM/YY HH:mm');
-    if (joinedDate.isValid()) handleFieldsChange(joinedDate.format('DD/MM/YY HH:mm'), key);
+    handleFieldsChange(`${date} ${time}`, key);
   };
   useEffect(() => {
     if (!timeFocus || !dateFocus) return;
@@ -64,18 +67,19 @@ const StyledDateInput: React.FC<Props> = (props) => {
   }, [date, time]);
 
   useEffect(() => {
-    handleFoucs();
-  }, [dateFocus, timeFocus]);
+    console.log(time, date);
+  }, [time, date]);
 
   useEffect(() => {
     if (!field.value) return;
     const dateVal = moment(field.value, 'DD/MM/YY HH:mm');
 
     if (!dateVal.isValid()) return;
-
-    setDate(dateVal.format('DD/MM/YY'));
-    setTime(dateVal.format('HH:mm'));
   }, [field, field.value]);
+
+  useEffect(() => {
+    handleFoucs();
+  }, [dateFocus, timeFocus]);
 
   return (
     <View style={{ ...styles.view }}>

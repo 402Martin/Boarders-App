@@ -33,20 +33,21 @@ const PendingRow: React.FC<Props> = (props) => {
     if (!res.data || !res.data.status) return;
     setStatus(res.data.status);
   };
+  console.log(data);
   return (
-    <StyledContainer style={{ ...(props.style || {}) }}>
-      <StyledContainer style={{ ...baseStyles.row, ...styles.row }}>
+    <StyledContainer style={{ ...(props.style || {}), marginLeft: 0 }}>
+      <StyledContainer style={{ ...baseStyles.row, ...styles.row, marginLeft: 0 }}>
         <Image
           source={{
             uri: data.user?.profilePic?.path || deafultImg,
           }}
-          style={{ width: 150, height: 150, borderRadius: 75, marginBottom: 20 }}
+          style={{ width: 100, height: 100, borderRadius: 5, marginBottom: 10, marginLeft: 0 }}
         />
         <StyledContainer style={styles.requestInfo}>
           <StyledText color={PaletteScale.BLACK} typography={TypographyScale.HEADING_BOLD2}>
             {data.user.username}
           </StyledText>
-          <Text style={styles.info}>{data.user?.description} </Text>
+          <Text style={styles.info}>{data.user?.description}</Text>
         </StyledContainer>
       </StyledContainer>
       <StyledContainer style={styles.buttonContainer}>

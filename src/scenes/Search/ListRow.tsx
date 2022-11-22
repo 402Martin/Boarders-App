@@ -44,6 +44,7 @@ const ListRow: React.FC<Props> = (props) => {
 
     setData();
   };
+
   return (
     <StyledContainer style={{ ...styles.row, ...(style || {}) }}>
       <StyledContainer style={styles.rowHeader}>
