@@ -17,5 +17,9 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     ...Typography.HEADING_SEMI_BOLD3,
+    height: '100%',
+    width: '100%',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
 });

@@ -9,15 +9,15 @@ import { styles } from './styles';
 type Props = {
   message: string;
   color?: PaletteScale;
+  backgroundColor?: PaletteScale;
 };
 
 const Message: React.FC<Props> = (props) => {
-  const { message, color } = props;
+  const { message, color, backgroundColor } = props;
   const themedColor = color || PaletteScale.PRIMARY_FIRST;
   const transformedStyles = StyleSheet.create({
     container: {
       ...styles.container,
-      backgroundColor: colorTranslucent(themedColor, 0.5),
       borderWidth: 2,
       borderColor: Palette[themedColor],
     },
@@ -25,7 +25,15 @@ const Message: React.FC<Props> = (props) => {
 
   return (
     <StyledView style={transformedStyles.container}>
-      <StyledText color={themedColor} style={styles.text}>
+      <StyledText
+        color={themedColor}
+        style={{
+          ...styles.text,
+          backgroundColor: backgroundColor
+            ? colorTranslucent(backgroundColor, 0.5)
+            : colorTranslucent(themedColor, 0.5),
+        }}
+      >
         {message}
       </StyledText>
     </StyledView>

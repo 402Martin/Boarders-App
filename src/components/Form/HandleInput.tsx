@@ -1,4 +1,5 @@
 import React from 'react';
+import StyledDateInput from '../StyledDateInput';
 import { StyledText } from '../StyledText';
 import { StyledTextInput } from '../StyledTextInput';
 import { styles } from './styles';
@@ -13,6 +14,7 @@ type Props = {
 const HandleInput: React.FC<Props> = (props) => {
   const { field, handleFieldsChange, handleOnFocus } = props;
   const key = props.inputKey;
+
   return (
     <>
       <StyledTextInput
@@ -25,6 +27,8 @@ const HandleInput: React.FC<Props> = (props) => {
         secureTextEntry={field.type === 'password'}
         validValue={field.isValid}
         onBlur={() => handleOnFocus(key)}
+        disabled={field.isDisabled}
+        value={field.value.toString()}
       ></StyledTextInput>
       {!field.isValid && (
         <StyledText style={styles.formChildError}>{field.isNotValidmessage || 'valor invalid'}</StyledText>

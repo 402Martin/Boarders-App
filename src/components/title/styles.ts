@@ -7,5 +7,6 @@ export const styles = StyleSheet.create({
   },
   title: {
     marginTop: '20%',
+    letterSpacing: 8,
   },
 });

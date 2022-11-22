@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'src/handler/axios.handler';
 import { IUserRegister } from 'src/types/main.types';
 import { ILogin, User } from 'src/types/user.types';
 import BaseService from './base.service';
@@ -10,11 +10,8 @@ export class UserService extends BaseService<User, IUserRegister> {
   }
 
   login = async (user: ILogin) => {
-    try {
-      return (await axios.post(endpoints.login, user)).data;
-    } catch (error) {
-      console.log(error);
-    }
+    const data = await axios.post(endpoints.login, user);
+    return data.data;
   };
 }
 

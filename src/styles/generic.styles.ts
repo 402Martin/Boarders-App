@@ -9,5 +9,10 @@ export const genericStyles = StyleSheet.create({
   horizontalCenter: {
     display: 'flex',
     alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+
+  transparent: {
+    backgroundColor: 'transparent',
   },
 });
