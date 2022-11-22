@@ -4,7 +4,14 @@ import { SceneContainer } from 'src/components/SceneContainer';
 import { RootStackParamList, routes } from 'src/navigation/routes';
 import { sessionService } from 'src/services';
 import { IMessage } from 'src/types/main.types';
-import { schema, succesMessage, updateSchema, wrongMessage } from './schema';
+import {
+  schema,
+  succesMessage,
+  updateSchema,
+  updateSuccesMessage,
+  updateWrongMessage,
+  wrongMessage,
+} from './schema';
 import { strings } from './strings';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyledText } from 'src/components/StyledText';
@@ -13,6 +20,7 @@ import { PaletteScale, TypographyScale } from 'src/styles/types';
 import { ISessionForm } from 'src/types/session.types';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { GameSession } from 'src/types/session.types';
+import { ISchema } from 'src/components/Form/types';
 type Props = {
   updateGameSession?: GameSession;
 };
@@ -20,7 +28,8 @@ const CreateSessionScene = (props: Props) => {
   const { updateGameSession } = props;
   const [message, setMessage] = useState<IMessage | undefined>();
   const { navigate } = useNavigation();
-  const [initialSchema, setInitialSchema] = useState(schema);
+  const [initialSchema, setInitialSchema] = useState<ISchema | undefined>(undefined);
+  const [isUpdate, setIsUpdate] = useState<Boolean>(false);
   const create = async (objValues: ISessionForm) => {
     const session = await sessionService.createSession(objValues);
     if (session) {
@@ -34,32 +43,41 @@ const CreateSessionScene = (props: Props) => {
   const update = async (objValues: ISessionForm) => {
     const session = await sessionService.update({ ...objValues, id: updateGameSession?.id });
     if (session) {
-      setMessage(succesMessage);
+      setMessage(!isUpdate ? succesMessage : updateSuccesMessage);
       setTimeout(() => {
         navigate(routes.MYSESSION);
       }, 500);
-    } else setMessage(wrongMessage);
+    } else setMessage(!isUpdate ? wrongMessage : updateWrongMessage);
   };
-
-  useEffect(() => {
-    if (updateGameSession) {
-      setInitialSchema(updateSchema(updateGameSession));
-    }
-  }, [updateGameSession]);
-
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    if (!isFocused) return;
-    setInitialSchema(schema);
-  }, [initialSchema]);
+    if (!isFocused) {
+      setMessage(undefined);
+      return;
+    }
+    if (updateGameSession) {
+      const newSchema = updateSchema(updateGameSession);
+      setIsUpdate(true);
+      setInitialSchema(newSchema);
+      return;
+    }
+    setIsUpdate(false);
+    setInitialSchema((s) => schema);
+  }, [isFocused]);
 
   const submit = (objValues: ISessionForm) => {
     if (updateGameSession) return update(objValues);
     return create(objValues);
   };
 
-  const buttons = [{ ...strings.buttons.createSession, isSubmit: true, onClick: submit }];
+  const buttons = [
+    {
+      ...(!isUpdate ? strings.buttons.createSession : strings.buttons.updateSession),
+      isSubmit: true,
+      onClick: submit,
+    },
+  ];
   return (
     <SceneContainer>
       <StyledView
@@ -76,9 +94,9 @@ const CreateSessionScene = (props: Props) => {
           typography={TypographyScale.HEADING_BOLD2}
           style={{ textAlign: 'center' }}
         >
-          {strings.title}
+          {!isUpdate ? strings.title : strings.updateTitle}
         </StyledText>
-        {isFocused && (
+        {isFocused && initialSchema && (
           <Form<ISessionForm>
             schema={initialSchema}
             buttons={buttons}

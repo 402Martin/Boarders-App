@@ -16,13 +16,14 @@ type Props = {
   handleOnFocus: (key: string) => void;
 };
 const StyledDateInput: React.FC<Props> = (props) => {
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const { field, handleFieldsChange, handleOnFocus } = props;
+  const [date, setDate] = useState(field.value.toString().split(' ')[0] || '');
+  const [time, setTime] = useState(field.value.toString().split(' ')[1] || '');
   const [dateFocus, setDateFocus] = useState(false);
   const [timeFocus, setTimeFocus] = useState(false);
   const key = props.inputKey;
 
-  const { field, handleFieldsChange, handleOnFocus } = props;
+  console.log(field.value.toString().split(' '));
 
   const handleOnDateChange = (dateIn: string) => {
     if (dateIn.length === 0) setDate('');
@@ -66,8 +67,8 @@ const StyledDateInput: React.FC<Props> = (props) => {
   }, [date, time]);
 
   useEffect(() => {
-    handleFoucs();
-  }, [dateFocus, timeFocus]);
+    console.log(time, date);
+  }, [time, date]);
 
   useEffect(() => {
     if (!field.value) return;
@@ -75,6 +76,10 @@ const StyledDateInput: React.FC<Props> = (props) => {
 
     if (!dateVal.isValid()) return;
   }, [field, field.value]);
+
+  useEffect(() => {
+    handleFoucs();
+  }, [dateFocus, timeFocus]);
 
   return (
     <View style={{ ...styles.view }}>

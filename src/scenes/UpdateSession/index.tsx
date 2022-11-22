@@ -21,7 +21,7 @@ const UpdateSession = (props: Props) => {
   useEffect(() => {
     getData();
   }, [id, props]);
-  return <CreateSessionScene updateGameSession={gameSession} />;
+  return <>{gameSession && <CreateSessionScene updateGameSession={gameSession} />}</>;
 };
 
 export default UpdateSession;
