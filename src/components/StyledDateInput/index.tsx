@@ -32,17 +32,20 @@ const StyledDateInput: React.FC<Props> = (props) => {
     if (split.length > 3) return;
 
     const maskedDate = split.join('/');
+
     setDate(maskedDate);
   };
 
   const handleTimeChange = (timeIn: string) => {
     if (timeIn.length === 0) setTime('');
     const unMaskedTime = timeIn.replace(/\D/g, '');
-    if (!Number(unMaskedTime)) return;
+    const re = new RegExp('0', 'g');
+
+    const count = unMaskedTime.match(re)?.length;
+    if (!(unMaskedTime.length === count) && !Number(unMaskedTime)) return;
     const split = unMaskedTime.match(/.{1,2}/g) ?? [];
 
     if (split.length > 2) return;
-
     const maskedTime = split.join(':');
 
     setTime(maskedTime);
@@ -55,8 +58,7 @@ const StyledDateInput: React.FC<Props> = (props) => {
   };
 
   const validateTime = () => {
-    const joinedDate = moment(`${date} ${time}`, 'DD/MM/YY HH:mm');
-    if (joinedDate.isValid()) handleFieldsChange(joinedDate.format('DD/MM/YY HH:mm'), key);
+    handleFieldsChange(`${date} ${time}`, key);
   };
   useEffect(() => {
     if (!timeFocus || !dateFocus) return;
@@ -72,9 +74,6 @@ const StyledDateInput: React.FC<Props> = (props) => {
     const dateVal = moment(field.value, 'DD/MM/YY HH:mm');
 
     if (!dateVal.isValid()) return;
-
-    setDate(dateVal.format('DD/MM/YY'));
-    setTime(dateVal.format('HH:mm'));
   }, [field, field.value]);
 
   return (
